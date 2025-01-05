@@ -4,6 +4,7 @@ const { createPackage, getAllPackages, getPackageById, updatePackage, deletePack
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
 const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch } = require('../controllers/BranchController');
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy } = require('../controllers/PrivacyController');
+const { createBanner, getAllBanner, getBannerById, updateBanner, deleteBanner } = require('../controllers/BannerController');
 
 
 const router = express.Router();
@@ -39,5 +40,12 @@ router.get('/getAllPrivacy', getAllPrivacy);
 router.get('/getPrivacyById/:id', getPrivacyById);
 router.put('/updatePrivacy/:id', updatePrivacy);
 router.delete('/deletePrivacy/:id', deletePrivacy);
+
+// banner related api 
+router.post('/createBanner', createBanner);
+router.get('/getAllBanner', getAllBanner);
+router.get('/getBannerById/:id', getBannerById);
+router.put('/updateBanner/:id', updateBanner);
+router.delete('/deleteBanner/:id', deleteBanner);
 
 module.exports = router
