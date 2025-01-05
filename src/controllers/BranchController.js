@@ -6,9 +6,15 @@ const createBranch = async (req, res) => {
         const newBranch = await BranchModel.create(req.body);
         res.status(201).json({ success: true, data: newBranch });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Failed to create branch" });
+        if (error.code === 11000) {
+            // Duplicate key error
+            res.status(409).json({ success: false, message: "Branch with the same branch already exists" });
+        } else {
+            res.status(500).json({ success: false, message: "Failed to create branch", error });
+        }
     }
 };
+
 
 
 // get all branches with location info populated
