@@ -8,7 +8,12 @@ const createLocation = async (req, res) => {
         await newLocation.save();
         res.status(201).json({ success: true, data: newLocation });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Failed to create location" });
+        if (error.code === 11000) {
+            // Duplicate key error
+            res.status(409).json({ success: false, message: "Location already exists" });
+        } else {
+            res.status(500).json({ success: false, message: "Failed to create location", error });
+        }
     }
 };
 
