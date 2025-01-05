@@ -3,6 +3,7 @@ const { hello } = require('../controllers/HelloController');
 const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage } = require('../controllers/PackageController');
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
 const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch } = require('../controllers/BranchController');
+const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy } = require('../controllers/PrivacyController');
 
 
 const router = express.Router();
@@ -31,5 +32,12 @@ router.get('/getAllBranches', getAllBranches);
 router.get('/getBranchById/:id', getBranchById);
 router.put('/updateBranch/:id', updateBranch);
 router.delete('/deleteBranch/:id', deleteBranch);
+
+// privacy related api 
+router.post('/createPrivacy', createPrivacy);
+router.get('/getAllPrivacy', getAllPrivacy);
+router.get('/getPrivacyById/:id', getPrivacyById);
+router.put('/updatePrivacy/:id', updatePrivacy);
+router.delete('/deletePrivacy/:id', deletePrivacy);
 
 module.exports = router
