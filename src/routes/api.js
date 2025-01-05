@@ -5,6 +5,7 @@ const { createLocation, getAllLocations, getLocationById, updateLocation, delete
 const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch } = require('../controllers/BranchController');
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy } = require('../controllers/PrivacyController');
 const { createBanner, getAllBanner, getBannerById, updateBanner, deleteBanner } = require('../controllers/BannerController');
+const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeature } = require('../controllers/FeatureController');
 
 
 const router = express.Router();
@@ -47,5 +48,12 @@ router.get('/getAllBanner', getAllBanner);
 router.get('/getBannerById/:id', getBannerById);
 router.put('/updateBanner/:id', updateBanner);
 router.delete('/deleteBanner/:id', deleteBanner);
+
+// feature related api 
+router.post('/createFeature', createFeature);
+router.get('/getAllFeatures', getAllFeatures);
+router.get('/getFeatureById/:id', getFeatureById);
+router.put('/updateFeature/:id', updateFeature);
+router.delete('/deleteFeature/:id', deleteFeature);
 
 module.exports = router
