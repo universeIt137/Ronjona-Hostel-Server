@@ -8,6 +8,7 @@ const { createBanner, getAllBanner, getBannerById, updateBanner, deleteBanner } 
 const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeature } = require('../controllers/FeatureController');
 const { createReview, getAllReview, getReviewById, updateReview, deleteReview } = require('../controllers/ReviewController');
 const { uploadPhoto, getAllPhoto, getPhotoById, updatePhoto, deletePhoto } = require('../controllers/PhotoGalleryController');
+const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = require('../controllers/VideoGalleryController');
 
 
 const router = express.Router();
@@ -72,5 +73,12 @@ router.get('/getAllPhoto', getAllPhoto);
 router.get('/getPhotoById/:id', getPhotoById);
 router.put('/updatePhoto/:id', updatePhoto);
 router.delete('/deletePhoto/:id', deletePhoto);
+
+// video gallery related api 
+router.post('/uploadVideo', uploadVideo);
+router.get('/getAllVideo', getAllVideo);
+router.get('/getVideoById/:id', getVideoById);
+router.put('/updateVideo/:id', updateVideo);
+router.delete('/deleteVideo/:id', deleteVideo);
 
 module.exports = router
