@@ -6,6 +6,7 @@ const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch 
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy } = require('../controllers/PrivacyController');
 const { createBanner, getAllBanner, getBannerById, updateBanner, deleteBanner } = require('../controllers/BannerController');
 const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeature } = require('../controllers/FeatureController');
+const { createReview, getAllReview, getReviewById, updateReview, deleteReview } = require('../controllers/ReviewController');
 
 
 const router = express.Router();
@@ -55,5 +56,13 @@ router.get('/getAllFeatures', getAllFeatures);
 router.get('/getFeatureById/:id', getFeatureById);
 router.put('/updateFeature/:id', updateFeature);
 router.delete('/deleteFeature/:id', deleteFeature);
+
+// review related api 
+router.post('/createReview', createReview);
+router.get('/getAllReview', getAllReview);
+router.get('/getReviewById/:id', getReviewById);
+router.put('/updateReview/:id', updateReview);
+router.delete('/deleteReview/:id', deleteReview);
+
 
 module.exports = router
