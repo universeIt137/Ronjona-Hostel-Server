@@ -7,6 +7,7 @@ const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePriva
 const { createBanner, getAllBanner, getBannerById, updateBanner, deleteBanner } = require('../controllers/BannerController');
 const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeature } = require('../controllers/FeatureController');
 const { createReview, getAllReview, getReviewById, updateReview, deleteReview } = require('../controllers/ReviewController');
+const { uploadPhoto, getAllPhoto, getPhotoById, updatePhoto, deletePhoto } = require('../controllers/PhotoGalleryController');
 
 
 const router = express.Router();
@@ -64,5 +65,12 @@ router.get('/getReviewById/:id', getReviewById);
 router.put('/updateReview/:id', updateReview);
 router.delete('/deleteReview/:id', deleteReview);
 
+
+// photo gallery related api 
+router.post('/uploadPhoto', uploadPhoto);
+router.get('/getAllPhoto', getAllPhoto);
+router.get('/getPhotoById/:id', getPhotoById);
+router.put('/updatePhoto/:id', updatePhoto);
+router.delete('/deletePhoto/:id', deletePhoto);
 
 module.exports = router
