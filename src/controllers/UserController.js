@@ -102,6 +102,16 @@ exports.adminLogin = async (req, res) => {
     }
 }
 
+exports.getAllUsers = async (req, res) => {
+    try {
+        const result = await UserModel.find();
+        res.status(200).json({ success: true, message: "All user fetched successfully", result });
+    } catch (error) {
+        res.status(200).json({ success: false, message: "user fetching failed", error:error.message });
+    }
+}
+
+
 exports.checkAdmin = (req, res) => {
     console.log(req.headers.role)
     res.status(200).json({ success: true, message: "Welcome, Admin!" })
