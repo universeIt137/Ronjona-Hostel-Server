@@ -9,6 +9,8 @@ const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeat
 const { createReview, getAllReview, getReviewById, updateReview, deleteReview } = require('../controllers/ReviewController');
 const { uploadPhoto, getAllPhoto, getPhotoById, updatePhoto, deletePhoto } = require('../controllers/PhotoGalleryController');
 const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = require('../controllers/VideoGalleryController');
+const { createAdmin, updateUserRole, adminLogin, checkAdmin } = require('../controllers/UserController');
+const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
 
 
 const router = express.Router();
@@ -75,10 +77,17 @@ router.put('/updatePhoto/:id', updatePhoto);
 router.delete('/deletePhoto/:id', deletePhoto);
 
 // video gallery related api 
-router.post('/uploadVideo', uploadVideo);
+router.post('/uploadVideo', verifyAdmin, uploadVideo);
 router.get('/getAllVideo', getAllVideo);
 router.get('/getVideoById/:id', getVideoById);
-router.put('/updateVideo/:id', updateVideo);
-router.delete('/deleteVideo/:id', deleteVideo);
+router.put('/updateVideo/:id',verifyAdmin, updateVideo);
+router.delete('/deleteVideo/:id', verifyAdmin, deleteVideo);
+
+// admin related api 
+router.post('/createAdmin', createAdmin);
+router.post('/updateUserRole', updateUserRole);
+router.post('/adminLogin', adminLogin);
+router.post("/admin-only-route", verifyAdmin, checkAdmin);
+
 
 module.exports = router
