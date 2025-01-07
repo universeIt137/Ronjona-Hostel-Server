@@ -64,14 +64,16 @@ exports.updateUserRole = async (req, res) => {
 exports.adminLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
-
-        // Check if user exists 
+        // Check if user exits 
         const user = await UserModel.findOne({ email });
         if (!user) {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        console.log(user)
+        // Check if the user is an admin 
+        if (user.role !== 'admin') {
+            return res.status(403).json({ success: false, message: "Access denied. Admins only" });
+        }
 
         // Compare passwords 
         const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -80,23 +82,25 @@ exports.adminLogin = async (req, res) => {
             return res.status(401).json({ success: false, message: "Invalid credentials" });
         }
 
+
         // Generate token 
         const token = jwt.sign(
             { userId: user._id, role: user.role },
             process.env.JWT_SECRET,
-            { expiresIn: '2h' } //Token expires in 2 hours
+            { expiresIn: '2h' }
         );
-
         res.status(200).json({
             success: true,
             message: "Login successful",
-            data: { token, user: { id: user._id, name: user.name, email: user.email, role: user.role } }
+            data: { token, user: { id: user._id, name: user.name, email: user.email, role: user.role }}
         });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Login failed", error: error.message })
+        res.status(500).json({
+            success: false, message: "Login failed", error: error.message
+        });
     }
-};
+}
 
 exports.checkAdmin = (req, res) => {
     console.log(req.headers.role)
