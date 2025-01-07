@@ -9,7 +9,7 @@ const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeat
 const { createReview, getAllReview, getReviewById, updateReview, deleteReview } = require('../controllers/ReviewController');
 const { uploadPhoto, getAllPhoto, getPhotoById, updatePhoto, deletePhoto } = require('../controllers/PhotoGalleryController');
 const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = require('../controllers/VideoGalleryController');
-const { createAdmin, updateUserRole, adminLogin, checkAdmin } = require('../controllers/UserController');
+const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers } = require('../controllers/UserController');
 const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
 
 
@@ -88,6 +88,7 @@ router.post('/createAdmin', createAdmin);
 router.post('/updateUserRole', updateUserRole);
 router.post('/adminLogin', adminLogin);
 router.post("/admin-only-route", verifyAdmin, checkAdmin);
+router.get("/getAllUsers", verifyAdmin, getAllUsers)
 
 
 module.exports = router
