@@ -5,7 +5,7 @@ exports.uploadVideo = async (req, res) => {
         const result = await VideoGalleryModel.create(req.body);
         res.status(201).json({ success: true, data: result });
     } catch (error) {
-        res.status(500).json({success: false, message: "Failed to upload", error})
+        res.status(500).json({ success: false, message: "Failed to upload", error })
     }
 }
 
