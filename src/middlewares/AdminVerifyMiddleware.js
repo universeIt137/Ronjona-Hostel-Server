@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 exports.verifyAdmin = (req, res, next) => {
     try {
         const token = req.headers.authorization; //get token from Authorization header
-        console.log(token);
+        // console.log(token);
 
         if (!token) {
             return res.status(401).json({ success: false, message: "Access Denied. No token provided." });

@@ -9,7 +9,7 @@ const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeat
 const { createReview, getAllReview, getReviewById, updateReview, deleteReview } = require('../controllers/ReviewController');
 const { uploadPhoto, getAllPhoto, getPhotoById, updatePhoto, deletePhoto } = require('../controllers/PhotoGalleryController');
 const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = require('../controllers/VideoGalleryController');
-const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers } = require('../controllers/UserController');
+const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers, deleteUser } = require('../controllers/UserController');
 const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
 
 
@@ -27,15 +27,15 @@ router.delete('/deletePackage/:id', deletePackage);
 
 
 // location related api
-router.post('/createLocation', createLocation);
-router.get('/getAllLocations', getAllLocations);
+router.post('/createLocation', verifyAdmin, createLocation);
+router.get('/getAllLocations', verifyAdmin, getAllLocations);
 router.get('/getLocationById/:id', getLocationById);
-router.put('/updateLocation/:id', updateLocation);
-router.delete('/deleteLocation/:id', deleteLocation);
+router.put('/updateLocation/:id', verifyAdmin, updateLocation);
+router.delete('/deleteLocation/:id', verifyAdmin, deleteLocation);
 
 // branch related api 
-router.post('/createBranch', createBranch);
-router.get('/getAllBranches', getAllBranches);
+router.post('/createBranch', verifyAdmin, createBranch);
+router.get('/getAllBranches', verifyAdmin, getAllBranches);
 router.get('/getBranchById/:id', getBranchById);
 router.put('/updateBranch/:id', updateBranch);
 router.delete('/deleteBranch/:id', deleteBranch);
@@ -85,10 +85,12 @@ router.delete('/deleteVideo/:id', verifyAdmin, deleteVideo);
 
 // admin related api 
 router.post('/createAdmin', createAdmin);
-router.post('/updateUserRole', updateUserRole);
+router.post('/updateUserRole', verifyAdmin, updateUserRole);
 router.post('/adminLogin', adminLogin);
 router.post("/admin-only-route", verifyAdmin, checkAdmin);
-router.get("/getAllUsers", verifyAdmin, getAllUsers)
+router.get("/getAllUsers", verifyAdmin, getAllUsers);
+router.delete("/deleteUser/:id", verifyAdmin, deleteUser);
 
+//This is a test.
 
 module.exports = router
