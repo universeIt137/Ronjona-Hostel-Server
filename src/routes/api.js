@@ -27,15 +27,15 @@ router.delete('/deletePackage/:id', deletePackage);
 
 
 // location related api
-router.post('/createLocation', createLocation);
-router.get('/getAllLocations', getAllLocations);
+router.post('/createLocation', verifyAdmin, createLocation);
+router.get('/getAllLocations', verifyAdmin, getAllLocations);
 router.get('/getLocationById/:id', getLocationById);
-router.put('/updateLocation/:id', updateLocation);
-router.delete('/deleteLocation/:id', deleteLocation);
+router.put('/updateLocation/:id', verifyAdmin, updateLocation);
+router.delete('/deleteLocation/:id', verifyAdmin, deleteLocation);
 
 // branch related api 
-router.post('/createBranch', createBranch);
-router.get('/getAllBranches', getAllBranches);
+router.post('/createBranch', verifyAdmin, createBranch);
+router.get('/getAllBranches', verifyAdmin, getAllBranches);
 router.get('/getBranchById/:id', getBranchById);
 router.put('/updateBranch/:id', updateBranch);
 router.delete('/deleteBranch/:id', deleteBranch);
