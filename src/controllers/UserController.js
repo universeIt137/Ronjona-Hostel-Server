@@ -112,6 +112,24 @@ exports.getAllUsers = async (req, res) => {
 }
 
 
+
+exports.deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedUser = await UserModel.findByIdAndDelete(id);
+
+        if (!deletedUser) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        res.status(200).json({success: true, message: "User deleted successfully"})
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error", error: error.message });
+    }
+}
+
+
+
 exports.checkAdmin = (req, res) => {
     console.log(req.headers.role)
     res.status(200).json({ success: true, message: "Welcome, Admin!" })
