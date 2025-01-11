@@ -23,7 +23,7 @@ router.post('/createPackage', createPackage);
 router.get('/getAllPackages', getAllPackages);
 router.get('/getPackageById/:id', getPackageById);
 router.put('/updatePackage/:id', updatePackage);
-router.delete('/deletePackage/:id', deletePackage);
+router.delete('/deletePackage/:id', verifyAdmin, deletePackage);
 
 
 // location related api
@@ -48,10 +48,10 @@ router.put('/updatePrivacy/:id', updatePrivacy);
 router.delete('/deletePrivacy/:id', deletePrivacy);
 
 // banner related api 
-router.post('/createBanner', createBanner);
+router.post('/createBanner', verifyAdmin, createBanner);
 router.get('/getAllBanner', getAllBanner);
 router.get('/getBannerById/:id', getBannerById);
-router.put('/updateBanner/:id', updateBanner);
+router.put('/updateBanner/:id', verifyAdmin, updateBanner);
 router.delete('/deleteBanner/:id', deleteBanner);
 
 // feature related api 

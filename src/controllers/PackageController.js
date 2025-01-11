@@ -14,7 +14,17 @@ const createPackage = async (req, res) => {
 // Get all packages
 const getAllPackages = async (req, res) => {
     try {
-        const packages = await PackageModel.find();
+        const packages = await PackageModel.find()
+            .populate('branch')
+            .populate({
+                path: 'branch',
+                populate: {
+                    path: 'location',
+                    model: 'locations' // Replace with the actual model name if different
+                }
+            });
+            
+            ;
         res.status(200).json({ success: true, data: packages });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch packages", error });

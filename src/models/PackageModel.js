@@ -2,19 +2,19 @@ const { default: mongoose, model } = require("mongoose");
 
 const DataSchema = new mongoose.Schema(
     {
-        img: { type: [String], required: true }, // Array of strings for images
-        video: { type: String, required: false }, // Optional video URL
+        img: { type: [String] }, // Array of strings for images
+        video: { type: String }, // Optional video URL
         features: [
             { 
-                featureTitle: { type: String, required: true },
-                featureDesc: { type: String, required: true }
+                featureTitle: { type: String },
+                featureDesc: { type: String }
             }
         ], // Array of objects for features
-        title: { type: String, required: true },
-        desc: { type: String, required: true },
-        price: { type: Number, required: true },
-        location: { type: String, required: true },
-        branch: { type: String, required: true }
+        title: { type: String },
+        desc: { type: String },
+        price: { type: String },
+        location: { type: String },
+        branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches" }
     },
     {
         timestamps: true,
