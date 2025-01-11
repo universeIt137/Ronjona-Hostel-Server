@@ -92,5 +92,6 @@ router.get("/getAllUsers", verifyAdmin, getAllUsers);
 router.delete("/deleteUser/:id", verifyAdmin, deleteUser);
 
 //This is a test.
+//This is a test2
 
 module.exports = router
