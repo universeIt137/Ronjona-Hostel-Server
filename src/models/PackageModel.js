@@ -5,7 +5,7 @@ const DataSchema = new mongoose.Schema(
         img: { type: [String] }, // Array of strings for images
         video: { type: String }, // Optional video URL
         features: [
-            { 
+            {
                 featureTitle: { type: String },
                 featureDesc: { type: String }
             }
@@ -14,7 +14,11 @@ const DataSchema = new mongoose.Schema(
         desc: { type: String },
         price: { type: String },
         location: { type: String },
-        branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches" }
+        branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches" },
+        locationLink: {
+            type: String,
+            unique: true
+        }
     },
     {
         timestamps: true,
