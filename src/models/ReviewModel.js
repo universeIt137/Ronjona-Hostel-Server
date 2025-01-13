@@ -4,7 +4,8 @@ const DataSchema = mongoose.Schema(
     {
         img: { type: String },
         name: { type: String },
-        review: {type: String}
+        review: {type: String},
+        location: {type: String}
     },
     {
         timestamps: true,
