@@ -28,7 +28,7 @@ router.delete('/deletePackage/:id', verifyAdmin, deletePackage);
 
 // location related api
 router.post('/createLocation', verifyAdmin, createLocation);
-router.get('/getAllLocations', verifyAdmin, getAllLocations);
+router.get('/getAllLocations',  getAllLocations);
 router.get('/getLocationById/:id', getLocationById);
 router.put('/updateLocation/:id', verifyAdmin, updateLocation);
 router.delete('/deleteLocation/:id', verifyAdmin, deleteLocation);
