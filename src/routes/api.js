@@ -1,6 +1,6 @@
 const express = require('express');
 const { hello } = require('../controllers/HelloController');
-const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage } = require('../controllers/PackageController');
+const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage,packagesByBranch } = require('../controllers/PackageController');
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
 const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch } = require('../controllers/BranchController');
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy } = require('../controllers/PrivacyController');
@@ -24,6 +24,7 @@ router.get('/getAllPackages', getAllPackages);
 router.get('/getPackageById/:id', getPackageById);
 router.put('/updatePackage/:id', updatePackage);
 router.delete('/deletePackage/:id', verifyAdmin, deletePackage);
+router.get("/packages-by-branch/:id", packagesByBranch )
 
 
 // location related api
