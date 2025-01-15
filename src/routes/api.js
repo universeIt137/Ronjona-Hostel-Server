@@ -11,7 +11,7 @@ const { uploadPhoto, getAllPhoto, getPhotoById, updatePhoto, deletePhoto } = req
 const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = require('../controllers/VideoGalleryController');
 const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers, deleteUser } = require('../controllers/UserController');
 const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
-const { CreateOffer, AllOffer, OfferById } = require('../controllers/OfferController');
+const { CreateOffer, AllOffer, OfferById, OfferUpdate } = require('../controllers/OfferController');
 
 
 const router = express.Router();
@@ -99,6 +99,7 @@ router.delete("/deleteUser/:id", verifyAdmin, deleteUser);
 router.post("/create-offer", verifyAdmin, CreateOffer);
 router.get("/all-offer", AllOffer);
 router.get("/offer-by-id/:id",  OfferById );
+router.put("/offer-update/:id",  OfferUpdate );
 
 
 

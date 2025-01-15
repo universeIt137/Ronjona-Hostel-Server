@@ -68,6 +68,32 @@ const OfferById = async (req, res) => {
     }
 };
 
+const OfferUpdate = async (req, res) => {
+    try {
+        let id = req.params.id;
+        let filter = {
+            _id: id
+        };
+        const reqBody = req.body;
+        const update = reqBody;
+        let data = await offerModel.updateOne(filter, update, { upsert: true });
+        if (!data) return res.status(404).json({
+            status: "fail",
+            msg: "Data not found"
+        });
+        return res.status(200).json({
+            status: "success",
+            msg: "Offer update successfully",
+            data : data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "fail",
+            msg : "Something went wrong"
+        })
+    }
+}
+
 
 
 
@@ -79,5 +105,6 @@ const OfferById = async (req, res) => {
 module.exports = {
     CreateOffer,
     AllOffer,
-    OfferById
+    OfferById,
+    OfferUpdate
 }
