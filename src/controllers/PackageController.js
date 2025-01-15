@@ -24,8 +24,8 @@ const getAllPackages = async (req, res) => {
                     model: 'locations' // Replace with the actual model name if different
                 }
             });
-            
-            ;
+
+        ;
         res.status(200).json({ success: true, data: packages });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch packages", error });
@@ -78,27 +78,27 @@ const packagesByBranch = async (req, res) => {
     try {
         const id = req.params.id;
         const filter = {
-            branch : new mongoose.Types.ObjectId(id)
+            branch: new mongoose.Types.ObjectId(id)
             // branch : id
         }
-        let data = await PackageModel.find( filter ).sort({
-            createdAt : -1
+        let data = await PackageModel.find(filter).sort({
+            createdAt: -1
         })
-        if (data.length===0) {
+        if (data.length === 0) {
             return res.status(404).json({
                 status: "fail",
-                msg : "Data not found"
+                msg: "Data not found"
             })
         }
         return res.status(200).json({
             status: "success",
             msg: "Data fetch successfully",
-            data : data
+            data: data
         })
     } catch (error) {
         return res.status(500).json({
             status: "fail",
-            msg:"Something went wrong"
+            msg: "Something went wrong"
         })
     }
 }
