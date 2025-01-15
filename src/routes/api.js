@@ -36,7 +36,7 @@ router.delete('/deleteLocation/:id', verifyAdmin, deleteLocation);
 
 // branch related api 
 router.post('/createBranch', verifyAdmin, createBranch);
-router.get('/getAllBranches', verifyAdmin, getAllBranches);
+router.get('/getAllBranches', getAllBranches);
 router.get('/getBranchById/:id', getBranchById);
 router.put('/updateBranch/:id', updateBranch);
 router.delete('/deleteBranch/:id', deleteBranch);
