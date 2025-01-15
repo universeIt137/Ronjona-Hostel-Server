@@ -11,7 +11,7 @@ const { uploadPhoto, getAllPhoto, getPhotoById, updatePhoto, deletePhoto } = req
 const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = require('../controllers/VideoGalleryController');
 const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers, deleteUser } = require('../controllers/UserController');
 const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
-const { CreateOffer } = require('../controllers/OfferController');
+const { CreateOffer, AllOffer } = require('../controllers/OfferController');
 
 
 const router = express.Router();
@@ -97,6 +97,7 @@ router.delete("/deleteUser/:id", verifyAdmin, deleteUser);
 // offer api
 
 router.post("/create-offer", verifyAdmin, CreateOffer);
+router.get("/all-offer", AllOffer);
 
 
 
