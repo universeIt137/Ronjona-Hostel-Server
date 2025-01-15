@@ -1,6 +1,6 @@
 const express = require('express');
 const { hello } = require('../controllers/HelloController');
-const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage,packagesByBranch } = require('../controllers/PackageController');
+const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage, packagesByBranch } = require('../controllers/PackageController');
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
 const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch } = require('../controllers/BranchController');
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy } = require('../controllers/PrivacyController');
@@ -11,6 +11,7 @@ const { uploadPhoto, getAllPhoto, getPhotoById, updatePhoto, deletePhoto } = req
 const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = require('../controllers/VideoGalleryController');
 const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers, deleteUser } = require('../controllers/UserController');
 const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
+const { CreateOffer, AllOffer } = require('../controllers/OfferController');
 
 
 const router = express.Router();
@@ -24,12 +25,12 @@ router.get('/getAllPackages', getAllPackages);
 router.get('/getPackageById/:id', getPackageById);
 router.put('/updatePackage/:id', updatePackage);
 router.delete('/deletePackage/:id', verifyAdmin, deletePackage);
-router.get("/packages-by-branch/:id", packagesByBranch )
+router.get("/packages-by-branch/:id", packagesByBranch)
 
 
 // location related api
 router.post('/createLocation', verifyAdmin, createLocation);
-router.get('/getAllLocations',  getAllLocations);
+router.get('/getAllLocations', getAllLocations);
 router.get('/getLocationById/:id', getLocationById);
 router.put('/updateLocation/:id', verifyAdmin, updateLocation);
 router.delete('/deleteLocation/:id', verifyAdmin, deleteLocation);
@@ -81,7 +82,7 @@ router.delete('/deletePhoto/:id', deletePhoto);
 router.post('/uploadVideo', verifyAdmin, uploadVideo);
 router.get('/getAllVideo', getAllVideo);
 router.get('/getVideoById/:id', getVideoById);
-router.put('/updateVideo/:id',verifyAdmin, updateVideo);
+router.put('/updateVideo/:id', verifyAdmin, updateVideo);
 router.delete('/deleteVideo/:id', verifyAdmin, deleteVideo);
 
 // admin related api 
@@ -92,7 +93,13 @@ router.post("/admin-only-route", verifyAdmin, checkAdmin);
 router.get("/getAllUsers", verifyAdmin, getAllUsers);
 router.delete("/deleteUser/:id", verifyAdmin, deleteUser);
 
-//This is a test.
-//This is a test2
+
+// offer api
+
+router.post("/create-offer", verifyAdmin, CreateOffer);
+router.get("/all-offer", AllOffer);
+
+
+
 
 module.exports = router
