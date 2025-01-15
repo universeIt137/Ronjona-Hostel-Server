@@ -22,26 +22,51 @@ const CreateOffer = async (req, res) => {
 const AllOffer = async (req, res) => {
     try {
         let data = await offerModel.find().sort({
-            createdAt : -1
+            createdAt: -1
         });
         if (data.length === 0) {
             return res.status(404).json({
                 status: "fail",
-                msg : "Data not found"
+                msg: "Data not found"
             })
         }
         return res.status(200).json({
             status: "success",
             msg: "Fetch all offer successfully",
-            data : data
+            data: data
         })
     } catch (error) {
         return res.status(500).json({
             status: "fail",
-            msg : "Something went wrong"
+            msg: "Something went wrong"
         })
     }
-}
+};
+
+
+const OfferById = async (req, res) => {
+    try {
+        let id = req.params.id;
+        let filter = {
+            _id: id
+        };
+        let data = await offerModel.findOne(filter);
+        if (!data) return res.status(404).json({
+            status: "success",
+            msg: "Data not found"
+        });
+        return res.status(200).json({
+            status: "success",
+            msg: "Data fetch successfully",
+            data: data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "fail",
+            msg: "Something went wrong"
+        })
+    }
+};
 
 
 
@@ -53,5 +78,6 @@ const AllOffer = async (req, res) => {
 
 module.exports = {
     CreateOffer,
-    AllOffer
+    AllOffer,
+    OfferById
 }
