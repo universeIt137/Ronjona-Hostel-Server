@@ -23,7 +23,9 @@ const getAllPackages = async (req, res) => {
                     path: 'location',
                     model: 'locations' // Replace with the actual model name if different
                 }
-            });
+            }).sort({
+                createdAt : -1
+            })
 
         ;
         res.status(200).json({ success: true, data: packages });
