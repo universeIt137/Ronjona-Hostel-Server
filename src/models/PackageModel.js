@@ -6,8 +6,8 @@ const DataSchema = new mongoose.Schema(
         video: { type: String }, // Optional video URL
         features: [
             {
-                featureTitle: { type: String },
-                featureDesc: { type: String }
+                featilityTitle : { type: String },
+                featilityImg : { type: String }
             }
         ], // Array of objects for features
         title: { type: String },
