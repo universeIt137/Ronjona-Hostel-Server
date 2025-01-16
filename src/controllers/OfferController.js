@@ -84,12 +84,36 @@ const OfferUpdate = async (req, res) => {
         return res.status(200).json({
             status: "success",
             msg: "Offer update successfully",
-            data : data
+            data: data
         })
     } catch (error) {
         return res.status(500).json({
             status: "fail",
-            msg : "Something went wrong"
+            msg: "Something went wrong"
+        })
+    }
+};
+
+const OfferDelete = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await offerModel.deleteOne(filter);
+        if (!data) return res.status(404).json({
+            status: "fail",
+            msg: "Data not found"
+        })
+        return res.status(200).json({
+            status: "success",
+            msg: `Data delete successfully`,
+            data: data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "fail",
+            msg: "Something went wrong"
         })
     }
 }
@@ -106,5 +130,6 @@ module.exports = {
     CreateOffer,
     AllOffer,
     OfferById,
-    OfferUpdate
+    OfferUpdate,
+    OfferDelete
 }
