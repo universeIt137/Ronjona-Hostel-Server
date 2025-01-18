@@ -49,19 +49,26 @@ exports.updatePhoto = async (req, res) => {
 
 exports.deletePhoto = async (req, res) => {
     try {
-        const { id } = req.params;
-        const result = await PhotoGalleryModel.findByIdAndDelete(id);
-
-        if (!result) {
-            return res.status(404).json({ success: false, message: "Photo not found" });
+        let id = req.params.id;
+        let filter = {
+            _id: id
+        };
+        let data = await PhotoGalleryModel.deleteOne(filter);
+        if (!data) {
+            return res.status(404).send({
+                status: "fail",
+                msg: "Photo delete fial"
+            })
         }
-
-        res.status(200).json({
-            success: true,
-            message: "Photo deleted successfully"
+        return res.status(200).json({
+            status: "success",
+            msg: "Photo delete successfully",
+            data: data
         })
-
     } catch (error) {
-       res.status(500).json({success: false, message: "Failed to delete Feature"}) 
+        return res.status(500).json({
+            status: "fail",
+            msg: "Something went wrong"
+        })
     }
-}
+};

@@ -76,7 +76,7 @@ router.post('/uploadPhoto', uploadPhoto);
 router.get('/getAllPhoto', getAllPhoto);
 router.get('/getPhotoById/:id', getPhotoById);
 router.put('/updatePhoto/:id', updatePhoto);
-router.delete('/deletePhoto/:id', deletePhoto);
+router.delete("/delete-photo/:id" , deletePhoto  )
 
 // video gallery related api 
 router.post('/uploadVideo', verifyAdmin, uploadVideo);
