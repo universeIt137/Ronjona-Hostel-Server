@@ -13,6 +13,9 @@ const contactSchema = new Schema({
     message: {
         type: String
     },
+    phone_number: {
+        type : String
+    },
     status: {
         type: Boolean,
         default : false
