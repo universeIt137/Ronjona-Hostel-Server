@@ -11,7 +11,9 @@ exports.uploadPhoto = async (req, res) => {
 
 exports.getAllPhoto = async (req, res) => {
     try {
-        const result = await PhotoGalleryModel.find();
+        const result = await PhotoGalleryModel.find().sort({
+            createdAt : -1
+        });
         res.status(200).json({ success: true, data: result });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch photo" });
