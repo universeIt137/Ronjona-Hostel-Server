@@ -12,6 +12,7 @@ const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = req
 const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers, deleteUser } = require('../controllers/UserController');
 const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
 const { CreateOffer, AllOffer, OfferById, OfferUpdate, OfferDelete } = require('../controllers/OfferController');
+const { sendContactData, allContactData } = require('../controllers/ContactController');
 
 
 const router = express.Router();
@@ -100,7 +101,14 @@ router.post("/create-offer", verifyAdmin, CreateOffer);
 router.get("/all-offer", AllOffer);
 router.get("/offer-by-id/:id",  OfferById );
 router.put("/offer-update/:id", verifyAdmin ,OfferUpdate );
-router.delete("/offer-delete/:id", verifyAdmin ,OfferDelete );
+router.delete("/offer-delete/:id", verifyAdmin, OfferDelete);
+
+
+// contact related api
+
+router.post("/send-contact", sendContactData);
+router.get("/all-data",  allContactData );
+
 
 
 
