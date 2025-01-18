@@ -44,3 +44,49 @@ exports.allContactData = async (req, res) => {
         })
     }
 }
+
+exports.statusUpdate = async (req, res) => {
+    try {
+        // Extracting the id from request parameters
+        const id = req.params.id;
+
+        // Defining the filter for MongoDB query
+        const filter = { _id: id };
+
+        // Fetching the existing document based on the filter
+        const data = await contactModel.findOne(filter);
+
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                message: "Data not found for the given ID."
+            });
+        }
+
+        // Toggle the status field
+        const updateData = data.status === true ? false : true;
+
+        // Update the document with the toggled status
+        const statusUpdate = await contactModel.findByIdAndUpdate(
+            id,
+            { $set: { status: updateData } },
+            { new: true } // Return the updated document
+        );
+
+        // Sending a success response with the updated document
+        return res.status(200).json({
+            success: true,
+            message: "Status updated successfully.",
+            data: statusUpdate
+        });
+    } catch (error) {
+        console.error("Error in statusUpdate:", error);
+        // Sending an error response
+        return res.status(500).json({
+            success: false,
+            message: "An error occurred while updating the status.",
+            error: error.message
+        });
+    }
+};
+
