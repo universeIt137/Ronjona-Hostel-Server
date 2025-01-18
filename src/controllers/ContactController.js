@@ -33,7 +33,7 @@ exports.allContactData = async (req, res) => {
 
         return res.status(200).send({
             status: "success",
-            msg: data
+            data: data
         })
 
 
