@@ -47,7 +47,7 @@ exports.updatePhoto = async (req, res) => {
     }
 }
 
-exports.deletePhoto = async (req, res) => {
+exports.deletePhoto = async (req, res) => { 
     try {
         let id = req.params.id;
         let filter = {

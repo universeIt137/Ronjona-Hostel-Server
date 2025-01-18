@@ -79,7 +79,7 @@ router.put('/updatePhoto/:id', updatePhoto);
 router.delete("/delete-photo/:id" , deletePhoto  )
 
 // video gallery related api 
-router.post('/uploadVideo', verifyAdmin, uploadVideo);
+router.post('/uploadVideo',  uploadVideo);
 router.get('/getAllVideo', getAllVideo);
 router.get('/getVideoById/:id', getVideoById);
 router.put('/updateVideo/:id', verifyAdmin, updateVideo);
