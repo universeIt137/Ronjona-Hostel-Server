@@ -12,7 +12,7 @@ const { uploadVideo, getAllVideo, getVideoById, updateVideo, deleteVideo } = req
 const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers, deleteUser } = require('../controllers/UserController');
 const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
 const { CreateOffer, AllOffer, OfferById, OfferUpdate, OfferDelete } = require('../controllers/OfferController');
-const { sendContactData, allContactData, statusUpdate } = require('../controllers/ContactController');
+const { sendContactData, allContactData, statusUpdate, deleteContact } = require('../controllers/ContactController');
 
 
 const router = express.Router();
@@ -109,6 +109,7 @@ router.delete("/offer-delete/:id", verifyAdmin, OfferDelete);
 router.post("/send-contact", sendContactData);
 router.get("/all-data",  allContactData );
 router.put("/update-status/:id",  statusUpdate );
+router.delete("/delete-data/:id",  deleteContact );
 
 
 

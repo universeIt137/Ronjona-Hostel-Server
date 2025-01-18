@@ -90,3 +90,30 @@ exports.statusUpdate = async (req, res) => {
     }
 };
 
+exports.deleteContact = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await contactModel.deleteOne(filter);
+        if (!data) {
+            return res.status(404).json({
+                status: "fail",
+                msg: "Data not found"
+            })
+        }
+        return res.status(200).json({
+            status: "success",
+            msg: "Data delete successfully",
+            data: data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "An error occurred while updating the status.",
+            error: error.message
+        });
+    }
+}
+
