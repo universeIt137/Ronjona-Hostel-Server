@@ -15,7 +15,7 @@ const { CreateOffer, AllOffer, OfferById, OfferUpdate, OfferDelete } = require('
 const { sendContactData, allContactData, statusUpdate, deleteContact } = require('../controllers/ContactController');
 const { aboutDataUpload } = require('../controllers/AboutController');
 const { missionDataUpload } = require('../controllers/VissionMissionController');
-const { createTeam, getAllTeamMember } = require('../controllers/TeamController');
+const { createTeam, getAllTeamMember, getTeamMemberById } = require('../controllers/TeamController');
 
 
 const router = express.Router();
@@ -130,6 +130,7 @@ router.put("/mission", missionDataUpload);
 
 router.post("/team", createTeam);
 router.get("/team", getAllTeamMember);
+router.get("/team/:id", getTeamMemberById);
 
 
 
