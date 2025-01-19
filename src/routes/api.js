@@ -117,7 +117,7 @@ router.delete("/delete-data/:id", deleteContact);
 // about related data
 
 router.put("/about-data", aboutDataUpload);
-router.get("/aboutDataById/:id", aboutDataById )
+router.get("/aboutDataById", aboutDataById )
 
 
 
