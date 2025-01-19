@@ -11,6 +11,9 @@ const teamSchema = new Schema({
     phoneNumber: {
         type: String
     },
+    img: {
+        type : String
+    },
     email: {
         type: String
     },
