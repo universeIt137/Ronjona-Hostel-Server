@@ -13,6 +13,8 @@ const { createAdmin, updateUserRole, adminLogin, checkAdmin, getAllUsers, delete
 const { verifyAdmin } = require('../middlewares/AdminVerifyMiddleware');
 const { CreateOffer, AllOffer, OfferById, OfferUpdate, OfferDelete } = require('../controllers/OfferController');
 const { sendContactData, allContactData, statusUpdate, deleteContact } = require('../controllers/ContactController');
+const { aboutDataUpload } = require('../controllers/AboutController');
+const { missionDataUpload } = require('../controllers/VissionMissionController');
 
 
 const router = express.Router();
@@ -109,8 +111,17 @@ router.delete("/offer-delete/:id", verifyAdmin, OfferDelete);
 router.post("/send-contact", sendContactData);
 router.get("/all-data",  allContactData );
 router.put("/update-status/:id",  statusUpdate );
-router.delete("/delete-data/:id",  deleteContact );
+router.delete("/delete-data/:id", deleteContact);
 
+// about related data
+
+router.put("/about-data", aboutDataUpload)
+
+
+
+// mission vission related api
+
+router.put("/mission", missionDataUpload )
 
 
 
