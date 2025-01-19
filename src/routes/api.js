@@ -16,6 +16,7 @@ const { sendContactData, allContactData, statusUpdate, deleteContact } = require
 const { aboutDataUpload, aboutDataById } = require('../controllers/AboutController');
 const { missionDataUpload } = require('../controllers/VissionMissionController');
 const { createTeam, getAllTeamMember, getTeamMemberById, updateTeam, deleteTeam } = require('../controllers/TeamController');
+const { createBooking } = require('../controllers/BookingController');
 
 
 const router = express.Router();
@@ -135,6 +136,12 @@ router.get("/team", getAllTeamMember);
 router.get("/team/:id", getTeamMemberById);
 router.put("/team/:id", updateTeam);
 router.delete("/team/:id", deleteTeam);
+
+
+
+// booking api
+
+router.post("/booking", createBooking);
 
 
 
