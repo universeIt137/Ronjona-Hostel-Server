@@ -26,12 +26,9 @@ exports.aboutDataUpload = async (req, res) => {
 
 exports.aboutDataById = async (req, res) => {
     try {
-        let id = req.params.id;
-        const filter = {
-            _id: id
-        }
-        let data = await aboutModel.findOne(filter);
-        if (!data) return res.status(404).json({
+        
+        let data = await aboutModel.find();
+        if (data.length===0) return res.status(404).json({
             status: "fail",
             msg : "Data not found",
         })
