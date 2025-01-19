@@ -15,6 +15,7 @@ const { CreateOffer, AllOffer, OfferById, OfferUpdate, OfferDelete } = require('
 const { sendContactData, allContactData, statusUpdate, deleteContact } = require('../controllers/ContactController');
 const { aboutDataUpload } = require('../controllers/AboutController');
 const { missionDataUpload } = require('../controllers/VissionMissionController');
+const { createTeam, getAllTeamMember } = require('../controllers/TeamController');
 
 
 const router = express.Router();
@@ -121,7 +122,14 @@ router.put("/about-data", aboutDataUpload)
 
 // mission vission related api
 
-router.put("/mission", missionDataUpload )
+router.put("/mission", missionDataUpload);
+
+
+
+// team related api
+
+router.post("/team", createTeam);
+router.get("/team", getAllTeamMember);
 
 
 
