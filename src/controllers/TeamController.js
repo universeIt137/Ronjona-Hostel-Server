@@ -62,7 +62,7 @@ exports.getTeamMemberById = async (req, res) => {
             msg: "Something went wrong"
         })
     }
-}
+};
 
 
 exports.updateTeam = async (req, res) => {
@@ -82,6 +82,32 @@ exports.updateTeam = async (req, res) => {
         return res.status(200).json({
             status: "success",
             msg: "Data update successfully",
+            data: data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "fail",
+            msg: "Something went"
+        })
+    }
+};
+
+exports.deleteTeam = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await teamModel.deleteOne(filter);
+        if (!data) {
+            return res.status(404).json({
+                status: "fail",
+                msg: "Data not found"
+            })
+        }
+        return res.status(200).json({
+            status: "success",
+            msg: "Data delete successfully",
             data: data
         })
     } catch (error) {
