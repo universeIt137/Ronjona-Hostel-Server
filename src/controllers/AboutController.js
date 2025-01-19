@@ -22,3 +22,28 @@ exports.aboutDataUpload = async (req, res) => {
         });
     }
 };
+
+
+exports.aboutDataById = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        }
+        let data = await aboutModel.findOne(filter);
+        if (!data) return res.status(404).json({
+            status: "fail",
+            msg : "Data not found",
+        })
+        return res.status(200).json({
+            status: "success",
+            msg: "Data fetch by id successfully",
+            data : data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "fail",
+            msg: "Something went wrong"
+        })
+    }
+}
