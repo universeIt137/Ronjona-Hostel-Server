@@ -17,6 +17,7 @@ const { aboutDataUpload, aboutDataById } = require('../controllers/AboutControll
 const { missionDataUpload } = require('../controllers/VissionMissionController');
 const { createTeam, getAllTeamMember, getTeamMemberById, updateTeam, deleteTeam } = require('../controllers/TeamController');
 const { createBooking } = require('../controllers/BookingController');
+const { whyChooseDataUpload, chooseDataById } = require('../controllers/WhyChooseController');
 
 
 const router = express.Router();
@@ -142,6 +143,12 @@ router.delete("/team/:id", deleteTeam);
 // booking api
 
 router.post("/booking", createBooking);
+
+
+// why choose api
+
+router.put("/why-choose", whyChooseDataUpload)
+router.get("/why-choose", chooseDataById)
 
 
 
