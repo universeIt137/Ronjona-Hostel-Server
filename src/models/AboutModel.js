@@ -43,6 +43,9 @@ const aboutSchema = new Schema({
             },
             role: {
                 type : String
+            },
+            linkedinLink: {
+                type : String
             }
         }
     ]
