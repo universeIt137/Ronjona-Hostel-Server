@@ -30,6 +30,9 @@ const aboutSchema = new Schema({
     valueDes: {
         type : String
     },
+    valuesTitle: {
+        type : String
+    },
     aboutTeamImg: [
         {
             img: {
