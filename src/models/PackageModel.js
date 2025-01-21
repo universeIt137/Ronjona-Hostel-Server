@@ -15,6 +15,9 @@ const DataSchema = new mongoose.Schema(
         price: { type: String },
         location: { type: String },
         branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches" },
+        bannerImage: {
+          type : String  
+        },
         locationLink: {
             type: String,
             unique: true
