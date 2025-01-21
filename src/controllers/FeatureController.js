@@ -11,7 +11,9 @@ const createFeature = async (req, res) => {
 
 const getAllFeatures = async (req, res) => {
     try {
-        const features = await FeatureModel.find();
+        const features = await FeatureModel.find().sort({
+            createdAt : -1
+        });
         res.status(200).json({ success: true, data: features });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch branches" });
