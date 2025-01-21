@@ -21,7 +21,9 @@ const createLocation = async (req, res) => {
 // get all locations
 const getAllLocations = async (req, res) => {
     try {
-        const locations = await LocationModel.find();
+        const locations = await LocationModel.find().sort({
+            createdAt : -1
+        });
         res.status(200).json({ success: true, data: locations });
     } catch (error) {
         res.status(500).json({ success: false, message: "failed to fetch locations" })
