@@ -15,7 +15,9 @@ const createPrivacy = async (req, res) => {
 // Get all privacy
 const getAllPrivacy = async (req, res) => {
     try {
-        const privacies = await PrivacyModel.find();
+        const privacies = await PrivacyModel.find().sort({
+            createdAt : -1
+        });
         res.status(200).json({ success: true, data: privacies });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch packages", error });
