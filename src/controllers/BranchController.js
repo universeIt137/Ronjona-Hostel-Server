@@ -20,7 +20,9 @@ const createBranch = async (req, res) => {
 // get all branches with location info populated
 const getAllBranches = async (req, res) => {
     try {
-        const branches = await BranchModel.find().populate('location');
+        const branches = await BranchModel.find().populate('location').sort({
+            createdAt : -1
+        });
         res.status(200).json({ success: true, data: branches });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch branches" });
