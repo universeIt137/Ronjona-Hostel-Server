@@ -11,7 +11,9 @@ exports.uploadVideo = async (req, res) => {
 
 exports.getAllVideo = async (req, res) => {
     try {
-        const result = await VideoGalleryModel.find();
+        const result = await VideoGalleryModel.find().sort({
+            createdAt : -1
+        });
         res.status(200).json({ success: true, data: result });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch videos" });
