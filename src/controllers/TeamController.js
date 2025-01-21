@@ -17,7 +17,6 @@ exports.createTeam = async (req, res) => {
     }
 };
 
-
 exports.getAllTeamMember = async (req, res) => {
     try {
         let data = await teamModel.find().sort({
@@ -63,7 +62,6 @@ exports.getTeamMemberById = async (req, res) => {
         })
     }
 };
-
 
 exports.updateTeam = async (req, res) => {
     try {
