@@ -11,7 +11,9 @@ exports.createReview = async (req, res) => {
 
 exports.getAllReview = async (req, res) => {
     try {
-        const reviews = await ReviewModel.find();
+        const reviews = await ReviewModel.find().sort({
+            createdAt : -1
+        });
         res.status(200).json({ success: true, data: reviews });
 
     } catch (error) {
