@@ -11,7 +11,7 @@ const createBanner = async (req, res) => {
 
 const getAllBanner = async (req, res) => {
     try {
-        const banners = await BannerModel.find();
+        const banners = await BannerModel.find().sort({ createdAt: -1 });
         res.status(200).json({ success: true, data: banners });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch banner", error });
