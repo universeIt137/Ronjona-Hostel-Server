@@ -12,14 +12,14 @@ const keyFeatureSchema = new Schema({
             },
         }
     ],
-    feature: [
+    features: [
         {
             title: {
                 type: String
             }
         }
     ],
-    facility: [
+    facilities: [
         {
             title: {
                 type: String
