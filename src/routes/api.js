@@ -163,11 +163,7 @@ router.get("/vission-mission", missionvissionById);
 // key features api
 
 
-router.post("/key-features", createKeyFeature);
-router.get("/key-features", getAllKeyFeatures);
-router.get("/key-features/:id", keyFeatureFindById);
-router.put("/key-features/:id", keyFeatureUpdate );
-router.delete("/key-features/:id", deleteKeyFeature);
+
 
 
 router.put("/key-features", keyFeatureUpload );
