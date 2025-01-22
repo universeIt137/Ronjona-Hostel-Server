@@ -19,7 +19,7 @@ const { createTeam, getAllTeamMember, getTeamMemberById, updateTeam, deleteTeam 
 const { createBooking } = require('../controllers/BookingController');
 const { whyChooseDataUpload, chooseDataById } = require('../controllers/WhyChooseController');
 const { missionVisionUpload, missionvissionById } = require('../controllers/missionVissionController');
-const { createKeyFeature, getAllKeyFeatures, keyFeatureFindById, keyFeatureUpdate, deleteKeyFeature, keyFeatureUpload } = require('../controllers/KeyFeatureController');
+const { createKeyFeature, getAllKeyFeatures, keyFeatureFindById, keyFeatureUpdate, deleteKeyFeature, keyFeatureUpload, keyFeatureData } = require('../controllers/KeyFeatureController');
 
 
 const router = express.Router();
@@ -167,6 +167,7 @@ router.get("/vission-mission", missionvissionById);
 
 
 router.put("/key-features", keyFeatureUpload );
+router.get("/key-features", keyFeatureData );
 
 
 
