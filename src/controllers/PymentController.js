@@ -14,6 +14,7 @@ exports.cratePayment = async (req, res) => {
             data
         );
     } catch (error) {
+        console.log(error)
         return errorResponse(
             res,
             500,
@@ -92,3 +93,77 @@ exports.paymentById = async (req, res) => {
         )
     }
 };
+
+
+exports.paymentUpdate = async (req, res) => {
+    try {
+        let id = req.params.id;
+        let filter = {
+            _id: id
+        };
+        let reqBody = req.body;
+        let update = reqBody;
+        let data = await paymentModel.updateOne(filter, update, { new: true });
+        if (!data) {
+            return (
+                errorResponse(
+                    res,
+                    404,
+                    "Data not found",
+                    null
+                )
+            )
+        }
+        return successResponse(
+            res,
+            200,
+            "Data update successfully",
+            data
+        )
+    } catch (error) {
+        return (
+            errorResponse(
+                res,
+                500,
+                "Something went wrong",
+                error
+            )
+        )
+
+    }
+};
+
+exports.paymentDelete = async (req, res) => {
+    try {
+        let id = req.params.id;
+        let filter = {
+            _id: id
+        };
+        let data = await paymentModel.deleteOne(filter);
+        if (!data) {
+            return (
+                errorResponse(
+                    res,
+                    404,
+                    "Data not found",
+                    null
+                )
+            )
+        }
+        return successResponse(
+            res,
+            200,
+            "Data delete successfully",
+            data
+        )
+    } catch (error) {
+        return (
+            errorResponse(
+                res,
+                500,
+                "Something went wrong",
+                error
+            )
+        )
+    }
+}

@@ -21,7 +21,7 @@ const { whyChooseDataUpload, chooseDataById } = require('../controllers/WhyChoos
 const { missionVisionUpload, missionvissionById } = require('../controllers/missionVissionController');
 const { createKeyFeature, getAllKeyFeatures, keyFeatureFindById, keyFeatureUpdate, deleteKeyFeature, keyFeatureUpload, keyFeatureData } = require('../controllers/KeyFeatureController');
 const { createFaq, allFaq, faqById, faqUpdate, faqDelete } = require('../controllers/FaqController');
-const { cratePayment } = require('../controllers/PymentController');
+const { cratePayment, getAllPayment, paymentById, paymentUpdate, paymentDelete } = require('../controllers/PymentController');
 
 
 const router = express.Router();
@@ -184,6 +184,10 @@ router.delete("/faq/:id", faqDelete);
 // payment related api
 
 router.post("/payment" , cratePayment)
+router.get("/payment" , getAllPayment)
+router.get("/payment/:id" , paymentById)
+router.put("/payment/:id" , paymentUpdate)
+router.delete("/payment/:id" , paymentDelete)
 
 
 
