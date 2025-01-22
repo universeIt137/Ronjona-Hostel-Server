@@ -20,7 +20,7 @@ const { createBooking } = require('../controllers/BookingController');
 const { whyChooseDataUpload, chooseDataById } = require('../controllers/WhyChooseController');
 const { missionVisionUpload, missionvissionById } = require('../controllers/missionVissionController');
 const { createKeyFeature, getAllKeyFeatures, keyFeatureFindById, keyFeatureUpdate, deleteKeyFeature, keyFeatureUpload, keyFeatureData } = require('../controllers/KeyFeatureController');
-const { createFaq, allFaq, faqById } = require('../controllers/FaqController');
+const { createFaq, allFaq, faqById, faqUpdate } = require('../controllers/FaqController');
 
 
 const router = express.Router();
@@ -176,6 +176,7 @@ router.get("/key-features", keyFeatureData);
 router.post("/faq", createFaq);
 router.get("/faq", allFaq);
 router.get("/faq/:id", faqById);
+router.put("/faq/:id", faqUpdate);
 
 
 

@@ -78,4 +78,35 @@ exports.faqById = async (req, res) => {
             error
         )
     }
+};
+
+
+exports.faqUpdate = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const reqBody = req.body;
+        const update = reqBody;
+        let data = await faqModel.findByIdAndUpdate(filter, update, { new: true });
+        if (!data) {
+            return errorResponse(
+                res,404,"Data not found",null
+            )
+        }
+        return successResponse(
+            res,
+            200,
+            "Data update successfully",
+            data
+        )
+    } catch (error) {
+        return errorResponse(
+            res,
+            500,
+            "Something went wrong",
+            error
+        )
+    }
 }
