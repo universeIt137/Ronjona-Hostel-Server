@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const { Schema, model } = mongoose;
 
 
@@ -7,21 +8,21 @@ const keyFeatureSchema = new Schema({
     images: [
         {
             img: {
-                type: String
-            }
+                type: String,
+            },
         }
     ],
-    features: [
+    feature: [
         {
             title: {
-                type : String
+                type: String
             }
         }
     ],
     facility: [
         {
             title: {
-                type : String
+                type: String
             }
         }
     ]
@@ -30,5 +31,6 @@ const keyFeatureSchema = new Schema({
 
 
 const keyFeatureModel = model("key-features", keyFeatureSchema);
+
 
 module.exports = keyFeatureModel;
