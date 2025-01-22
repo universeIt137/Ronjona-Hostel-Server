@@ -7,7 +7,7 @@ exports.createKeyFeature = async (req, res) => {
         let reqBody = req.body;
         const data = await keyFeatureModel.create(reqBody);
         return successResponse(
-            res,201,"Data upload successfully",data
+            res, 201, "Data upload successfully", data
         )
     } catch (error) {
         errorResponse(
@@ -111,3 +111,26 @@ exports.deleteKeyFeature = async (req, res) => {
         )
     }
 };
+
+
+exports.keyFeatureUpload = async (req, res) => {
+    try {
+        let reqBody = req.body;
+        let data = await keyFeatureModel.updateOne(
+            {},
+            { $set: reqBody }, // Directly spread the `reqBody` to set its fields in the database
+            { upsert: true }   // Create the document if it doesn't exist
+        );
+        return res.status(200).json({
+            status: "success",
+            msg: "Data uploaded",
+            data: data
+        });
+    } catch (error) {
+        console.error("Error in aboutDataUpload:", error); // Log the error for debugging
+        return res.status(500).json({
+            status: "fail",
+            msg: "Something went wrong"
+        });
+    }
+}

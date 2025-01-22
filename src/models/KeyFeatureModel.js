@@ -11,13 +11,21 @@ const keyFeatureSchema = new Schema({
             }
         }
     ],
-    features: {
-        type : String
-    },
-    facility: {
-        type : String
-    },
-    
+    features: [
+        {
+            title: {
+                type : String
+            }
+        }
+    ],
+    facility: [
+        {
+            title: {
+                type : String
+            }
+        }
+    ]
+
 }, { timestamps: true, versionKey: false });
 
 
