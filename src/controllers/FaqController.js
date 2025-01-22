@@ -92,13 +92,45 @@ exports.faqUpdate = async (req, res) => {
         let data = await faqModel.findByIdAndUpdate(filter, update, { new: true });
         if (!data) {
             return errorResponse(
-                res,404,"Data not found",null
+                res, 404, "Data not found", null
             )
         }
         return successResponse(
             res,
             200,
             "Data update successfully",
+            data
+        )
+    } catch (error) {
+        return errorResponse(
+            res,
+            500,
+            "Something went wrong",
+            error
+        )
+    }
+};
+
+
+exports.faqDelete = async (req, res) => {
+    try {
+        let id = req.params.id;
+        let filter = {
+            _id: id
+        };
+        const data = await faqModel.deleteOne(filter);
+        if (!data) {
+            return errorResponse(
+                res,
+                404,
+                "Data not found",
+                null
+            )
+        }
+        return successResponse(
+            res,
+            200,
+            "Data delete successfully",
             data
         )
     } catch (error) {
