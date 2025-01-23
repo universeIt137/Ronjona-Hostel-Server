@@ -1,5 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const PackageModel = require("../models/PackageModel");
+const { errorResponse, successResponse } = require("../helper/response");
 
 // Create a new package
 const createPackage = async (req, res) => {
@@ -24,10 +25,10 @@ const getAllPackages = async (req, res) => {
                     model: 'locations' // Replace with the actual model name if different
                 }
             }).sort({
-                createdAt : -1
+                createdAt: -1
             })
 
-        ;
+            ;
         res.status(200).json({ success: true, data: packages });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch packages", error });
@@ -103,6 +104,25 @@ const packagesByBranch = async (req, res) => {
             msg: "Something went wrong"
         })
     }
+};
+
+
+const branchByPackages = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const filter = {
+            branch: id
+        };
+        const data = await PackageModel.find(filter).sort({
+            createdAt: -1
+        });
+        if (data.length === 0) {
+            return errorResponse(res, 404, "Packages not found", null);
+        }
+        return successResponse(res, 200, "Packages Fetch successfully", data)
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error);
+    }
 }
 
 module.exports = {
@@ -111,5 +131,6 @@ module.exports = {
     getPackageById,
     updatePackage,
     deletePackage,
-    packagesByBranch
+    packagesByBranch,
+    branchByPackages
 };
