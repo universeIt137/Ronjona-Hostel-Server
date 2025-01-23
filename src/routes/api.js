@@ -2,7 +2,7 @@ const express = require('express');
 const { hello } = require('../controllers/HelloController');
 const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage, packagesByBranch } = require('../controllers/PackageController');
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
-const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch } = require('../controllers/BranchController');
+const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch, locationByBranch } = require('../controllers/BranchController');
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy } = require('../controllers/PrivacyController');
 const { createBanner, getAllBanner, getBannerById, updateBanner, deleteBanner } = require('../controllers/BannerController');
 const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeature } = require('../controllers/FeatureController');
@@ -51,6 +51,7 @@ router.get('/getAllBranches', getAllBranches);
 router.get('/getBranchById/:id', getBranchById);
 router.put('/updateBranch/:id', updateBranch);
 router.delete('/deleteBranch/:id', deleteBranch);
+router.get("/locationby-branch/:id",locationByBranch)
 
 // privacy related api 
 router.post('/createPrivacy', createPrivacy);
@@ -183,11 +184,11 @@ router.delete("/faq/:id", faqDelete);
 
 // payment related api
 
-router.post("/payment" , cratePayment)
-router.get("/payment" , getAllPayment)
-router.get("/payment/:id" , paymentById)
-router.put("/payment/:id" , paymentUpdate)
-router.delete("/payment/:id" , paymentDelete)
+router.post("/payment", cratePayment);
+router.get("/payment", getAllPayment);
+router.get("/payment/:id", paymentById);
+router.put("/payment/:id", paymentUpdate);
+router.delete("/payment/:id", paymentDelete);
 
 
 

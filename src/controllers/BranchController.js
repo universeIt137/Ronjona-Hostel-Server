@@ -1,3 +1,4 @@
+const { errorResponse, successResponse } = require("../helper/response");
 const BranchModel = require("../models/BranchModel")
 
 // Create a new branch 
@@ -81,6 +82,24 @@ const deleteBranch = async (req, res) => {
 };
 
 
+// location by branch api
+
+const locationByBranch = async (req, res) => {
+    try {
+        let id = req.params.id;
+        let filter = {
+            location : id
+        };
+        let data = await BranchModel.find(filter).sort({ createdAt: -1 });
+        if (data.length === 0) {
+            return errorResponse(res,404,"Location not found",null)
+        }
+        return successResponse(res, 200, "Location fetch successfully", data);
+    } catch (error) {
+        return errorResponse(res,500,"Something went wrong",null)
+    }
+}
+
 
 
 
@@ -89,5 +108,6 @@ module.exports = {
     getAllBranches,
     getBranchById,
     updateBranch,
-    deleteBranch
+    deleteBranch,
+    locationByBranch
 }
