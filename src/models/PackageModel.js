@@ -6,8 +6,8 @@ const DataSchema = new mongoose.Schema(
         video: { type: String }, // Optional video URL
         features: [
             {
-                featilityTitle : { type: String },
-                featilityImg : { type: String }
+                featilityTitle: { type: String },
+                featilityImg: { type: String }
             }
         ], // Array of objects for features
         title: { type: String },
@@ -16,7 +16,7 @@ const DataSchema = new mongoose.Schema(
         location: { type: String },
         branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches" },
         bannerImage: {
-          type : String  
+            type: String
         },
         locationLink: {
             type: String,
