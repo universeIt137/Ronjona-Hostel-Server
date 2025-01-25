@@ -97,7 +97,7 @@ const postPrivacy = async (req, res) => {
             msg: "Something went wrong"
         });
     }
-}
+};
 
 
 
