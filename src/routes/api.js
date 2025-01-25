@@ -57,7 +57,7 @@ router.get("/locationby-branch/:id",locationByBranch)
 // privacy related api 
 router.post('/createPrivacy', createPrivacy);
 router.get('/getAllPrivacy', getAllPrivacy);
-router.get('/getPrivacyById/:id', getPrivacyById);
+router.get('/getPrivacyById', getPrivacyById);
 router.put('/updatePrivacy/:id', updatePrivacy);
 router.delete('/deletePrivacy/:id', deletePrivacy);
 router.put("/privacy-upload",  postPrivacy )
