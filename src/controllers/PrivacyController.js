@@ -26,14 +26,22 @@ const getAllPrivacy = async (req, res) => {
 
 const getPrivacyById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const privacy = await PrivacyModel.findById(id);
-        if (!privacy) {
-            return res.status(404).json({ success: false, message: "Privacy not found" });
-        }
-        res.status(200).json({ success: true, data: privacy })
+
+        let data = await PrivacyModel.find();
+        if (data.length === 0) return res.status(404).json({
+            status: "fail",
+            msg: "Data not found",
+        })
+        return res.status(200).json({
+            status: "success",
+            msg: "Data fetch by id successfully",
+            data: data
+        })
     } catch (error) {
-        res.status(500).json({ success: false, message: "failed to fetch privacy", error });
+        return res.status(500).json({
+            status: "fail",
+            msg: "Something went wrong"
+        })
     }
 }
 
