@@ -6,7 +6,7 @@ const createPrivacy = async (req, res) => {
         const newPrivacy = new PrivacyModel(req.body);
         await newPrivacy.save();
         res.status(201).json({ success: true, data: newPrivacy });
-     
+
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to create privacy", error });
     }
@@ -16,7 +16,7 @@ const createPrivacy = async (req, res) => {
 const getAllPrivacy = async (req, res) => {
     try {
         const privacies = await PrivacyModel.find().sort({
-            createdAt : -1
+            createdAt: -1
         });
         res.status(200).json({ success: true, data: privacies });
     } catch (error) {
@@ -31,7 +31,7 @@ const getPrivacyById = async (req, res) => {
         if (!privacy) {
             return res.status(404).json({ success: false, message: "Privacy not found" });
         }
-        res.status(200).json({success: true, data: privacy})
+        res.status(200).json({ success: true, data: privacy })
     } catch (error) {
         res.status(500).json({ success: false, message: "failed to fetch privacy", error });
     }
@@ -69,10 +69,35 @@ const deletePrivacy = async (req, res) => {
 };
 
 
+const postPrivacy = async (req, res) => {
+    try {
+        let reqBody = req.body;
+        let data = await PrivacyModel.updateOne(
+            {},
+            { $set: reqBody }, // Directly spread the `reqBody` to set its fields in the database
+            { upsert: true }   // Create the document if it doesn't exist
+        );
+        return res.status(200).json({
+            status: "success",
+            msg: "Data uploaded",
+            data: data
+        });
+    } catch (error) {
+        console.error("Error in aboutDataUpload:", error); // Log the error for debugging
+        return res.status(500).json({
+            status: "fail",
+            msg: "Something went wrong"
+        });
+    }
+}
+
+
+
 module.exports = {
     createPrivacy,
     getAllPrivacy,
     getPrivacyById,
     updatePrivacy,
-    deletePrivacy
+    deletePrivacy,
+    postPrivacy
 }

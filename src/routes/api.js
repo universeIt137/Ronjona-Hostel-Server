@@ -3,7 +3,7 @@ const { hello } = require('../controllers/HelloController');
     const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage, packagesByBranch, branchByPackages, } = require('../controllers/PackageController');
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
 const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch, locationByBranch } = require('../controllers/BranchController');
-const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy } = require('../controllers/PrivacyController');
+const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy, postPrivacy } = require('../controllers/PrivacyController');
 const { createBanner, getAllBanner, getBannerById, updateBanner, deleteBanner } = require('../controllers/BannerController');
 const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeature } = require('../controllers/FeatureController');
 const { createReview, getAllReview, getReviewById, updateReview, deleteReview } = require('../controllers/ReviewController');
@@ -60,6 +60,7 @@ router.get('/getAllPrivacy', getAllPrivacy);
 router.get('/getPrivacyById/:id', getPrivacyById);
 router.put('/updatePrivacy/:id', updatePrivacy);
 router.delete('/deletePrivacy/:id', deletePrivacy);
+router.put("/privacy-upload",  postPrivacy )
 
 // banner related api 
 router.post('/createBanner', verifyAdmin, createBanner);
