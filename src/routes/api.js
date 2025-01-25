@@ -22,7 +22,7 @@ const { missionVisionUpload, missionvissionById } = require('../controllers/miss
 const { createKeyFeature, getAllKeyFeatures, keyFeatureFindById, keyFeatureUpdate, deleteKeyFeature, keyFeatureUpload, keyFeatureData } = require('../controllers/KeyFeatureController');
 const { createFaq, allFaq, faqById, faqUpdate, faqDelete } = require('../controllers/FaqController');
 const { cratePayment, getAllPayment, paymentById, paymentUpdate, paymentDelete } = require('../controllers/PymentController');
-const { postTermCondiction } = require('../controllers/TermCondictionController');
+const { postTermCondiction, getTermCondictionById } = require('../controllers/TermCondictionController');
 
 
 const router = express.Router();
@@ -196,7 +196,8 @@ router.delete("/payment/:id", paymentDelete);
 
 // term condiction
 
-router.put("/post-term" , postTermCondiction )
+router.put("/post-term", postTermCondiction);
+router.get("/get-term", getTermCondictionById);
 
 
 
