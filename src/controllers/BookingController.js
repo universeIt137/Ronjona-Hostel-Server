@@ -21,14 +21,58 @@ exports.createBooking = async (req, res) => {
 
 exports.manageBookingPackages = async (req, res) => {
     try {
-        const data = await bookingModel
-            .find()
-            .populate("packages", "name location") // Fetch only specific fields
-            .sort({ createdAt: -1 }); // Sort by creation date
 
-        if (!data || data.length === 0) {
-            return successResponse(res, 200, "No booking packages found", null);
+        // join packages model
+
+        const joinWithPakagesModel = {
+            $lookup: {
+                from: "packages", // Collection you want to join with
+                localField: "packagesId", // Field from the current collection
+                foreignField: "_id", // Field from the 'packages' collection
+                as: "packageDetails" // Alias for the result of the join
+            }
+        };
+
+        // join branch model
+
+        const joinWithBranchId = {
+            $lookup: {
+                from: "branches",
+                localField: "packageDetails.branch",
+                foreignField: "_id",
+                as: "branchDetails"
+            }
         }
+
+        // join  location model
+
+        const joinWithLocationModel = {
+            $lookup: {
+                from: "locations",
+                localField: "branchDetails.location",
+                foreignField: "_id",
+                as: "locationDetails"
+            }
+        }
+
+        // unwind
+
+        const packagesUnwind = {
+            $unwind: "$packageDetails" // Correctly specify the field path with $
+        };
+        // unwind branchDetails
+        const branchUnwind = {
+            $unwind: "$branchDetails" // Correctly specify the field path with $
+        };
+        // unwind location
+
+        const locationUnwind = {
+            $unwind: "$locationDetails" // Correctly specify the field path with $
+        };
+
+
+
+        const data = await bookingModel.aggregate([joinWithPakagesModel, packagesUnwind, joinWithBranchId, branchUnwind, joinWithLocationModel, locationUnwind])
 
         return successResponse(res, 200, "Data fetched successfully", data);
     } catch (error) {
