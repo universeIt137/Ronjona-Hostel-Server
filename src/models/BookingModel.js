@@ -5,25 +5,26 @@ const { Schema, model } = mongoose;
 
 const bookingSchema = new Schema({
     name: {
-        type : String
+        type: String
     },
     phoneNumber: {
-        type : String
+        type: String
     },
     packagesId: {
-        type : mongoose.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
+        ref: "PackageModel"
     },
     status: {
         type: Boolean,
-        default : false
+        default: false
     },
     tran_id: {
-        type : String
+        type: String
     }
 }, { timestamps: true, versionKey: false });
 
 
-const bookingModel = model("bookings",bookingSchema);
+const bookingModel = model("bookings", bookingSchema);
 
 
 module.exports = bookingModel;
