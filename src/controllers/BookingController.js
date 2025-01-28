@@ -80,3 +80,22 @@ exports.manageBookingPackages = async (req, res) => {
         return errorResponse(res, 500, "Something went wrong", error.message || error);
     }
 };
+
+
+exports.bookingFromStatusUpdate = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await bookingModel.findOne(filter);
+        const updateData = data.status ? false : true;
+        const statusUpdate = {
+            status: updateData
+        };
+        const updateStatusData = await bookingModel.updateOne(filter, { $set: statusUpdate }, { upsert: true });
+        return successResponse(res,200,"Status update successfully",updateStatusData)
+    } catch (error) {
+        return errorResponse(res,500,"Something went wrong",error)
+    }
+}
