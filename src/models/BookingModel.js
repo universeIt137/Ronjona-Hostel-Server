@@ -16,6 +16,9 @@ const bookingSchema = new Schema({
     status: {
         type: Boolean,
         default : false
+    },
+    tran_id: {
+        type : String
     }
 }, { timestamps: true, versionKey: false });
 
