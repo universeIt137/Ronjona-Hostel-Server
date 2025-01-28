@@ -23,6 +23,7 @@ const { createKeyFeature, getAllKeyFeatures, keyFeatureFindById, keyFeatureUpdat
 const { createFaq, allFaq, faqById, faqUpdate, faqDelete } = require('../controllers/FaqController');
 const { cratePayment, getAllPayment, paymentById, paymentUpdate, paymentDelete } = require('../controllers/PymentController');
 const { postTermCondiction, getTermCondictionById } = require('../controllers/TermCondictionController');
+const { postRefund, getRefundById } = require('../controllers/RefundController');
 
 
 const router = express.Router();
@@ -199,6 +200,11 @@ router.delete("/payment/:id", paymentDelete);
 router.put("/post-term", postTermCondiction);
 router.get("/get-term", getTermCondictionById);
 
+
+// refund api
+
+router.put("/refund", postRefund);
+router.get("/refund", getRefundById );
 
 
 
