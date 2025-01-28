@@ -21,14 +21,22 @@ exports.createBooking = async (req, res) => {
 
 exports.manageBookingPackages = async (req, res) => {
     try {
-        const data = await bookingModel
-            .find()
-            .populate("packages", "name location") // Fetch only specific fields
-            .sort({ createdAt: -1 }); // Sort by creation date
 
-        if (!data || data.length === 0) {
-            return successResponse(res, 200, "No booking packages found", null);
-        }
+        const joinWithPakagesModel = {
+            $lookup: {
+                from: "packages", // Collection you want to join with
+                localField: "packagesId", // Field from the current collection
+                foreignField: "_id", // Field from the 'packages' collection
+                as: "packageDetails" // Alias for the result of the join
+            }
+        };
+
+        // unwind
+
+        const packagesUnwind = {
+            $unwind: "$packageDetails" // Correctly specify the field path with $
+        };
+        const data = await bookingModel.aggregate([joinWithPakagesModel, packagesUnwind])
 
         return successResponse(res, 200, "Data fetched successfully", data);
     } catch (error) {
