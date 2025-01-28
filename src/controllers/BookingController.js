@@ -99,3 +99,20 @@ exports.bookingFromStatusUpdate = async (req, res) => {
         return errorResponse(res,500,"Something went wrong",error)
     }
 }
+
+
+exports.deleteFrom = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await bookingModel.deleteOne(filter);
+        if (!data) {
+            return errorResponse(res, 404, "Data not found", null);
+        }
+        return successResponse(res, 200, "Data delete successfully");
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error);
+    }
+}
