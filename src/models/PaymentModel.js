@@ -6,13 +6,19 @@ const { Schema, model } = mongoose;
 
 
 const paymentSchema = new Schema({
-    logo: {
+    accountName: {
         type : String
     },
-    paymentName: {
+    accountNumber: {
+        type : String
+    },
+    bankName: {
         type : String
     },
     phoneNumber: {
+        type : String
+    },
+    branchName: {
         type : String
     }
 }, { timestamps: true, versionKey: false });
