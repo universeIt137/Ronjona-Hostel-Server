@@ -8,18 +8,13 @@ const teamSchema = new Schema({
     role: {
         type: String
     },
-    phoneNumber: {
+    des: {
         type: String
     },
     img: {
-        type : String
-    },
-    email: {
         type: String
     },
-    experience: {
-        type: String
-    }
+
 }, { timestamps: true, versionKey: false });
 
 
