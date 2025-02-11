@@ -17,7 +17,6 @@ const DataSchema = new mongoose.Schema(
         location: { type: mongoose.Schema.Types.ObjectId, ref: "locations" },
         seatAvalible: {
             type: String,
-            default: "Yes"
         },
         bannerImage: { type: String },
     },
