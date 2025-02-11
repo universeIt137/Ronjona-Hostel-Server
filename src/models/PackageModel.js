@@ -1,30 +1,24 @@
-const { default: mongoose, model } = require("mongoose");
+const mongoose = require("mongoose");
 
 const DataSchema = new mongoose.Schema(
     {
-        img: { type: [String] }, // Array of strings for images
+        img: { type: [String] }, // Array of image URLs
         video: { type: String }, // Optional video URL
         features: [
             {
-                featilityTitle: { type: String },
-                featilityImg: { type: String }
+                featureTitle: { type: String }, // Fixed typo
+                featureImg: { type: String }   // Fixed typo
             }
         ], // Array of objects for features
-        title: { type: String },
+        title: { type: String, },
         desc: { type: String },
         price: { type: String },
-        location: { type: String },
-        branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches" },
-        bannerImage: {
-            type: String
-        },
-        locationLink: {
-            type: String,
-            unique: true
-        }
+        branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches", required: true },
+        locationId: { type: mongoose.Schema.Types.ObjectId, ref: "locations", required: true },
+        bannerImage: { type: String },
     },
     {
-        timestamps: true,
+        timestamps: true, // Automatically adds createdAt and updatedAt
         versionKey: false
     }
 );
