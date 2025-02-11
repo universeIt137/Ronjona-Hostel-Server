@@ -25,6 +25,7 @@ const { cratePayment, getAllPayment, paymentById, paymentUpdate, paymentDelete }
 const { postTermCondiction, getTermCondictionById } = require('../controllers/TermCondictionController');
 const { postRefund, getRefundById } = require('../controllers/RefundController');
 const { uploadHotline, allNumber, hotlineById, hotlineUpdate, hotlineDelete } = require('../controllers/HotlineController');
+const { uploadAddress, allAddress, addressById, addressUpdate, addressDelete } = require('../controllers/AddressController');
 
 
 const router = express.Router();
@@ -221,7 +222,16 @@ router.post("/upload", verifyAdmin ,uploadHotline);
 router.get("/all-hotline",allNumber);
 router.get("/hotline-by-id/:id", hotlineById );
 router.put("/hotline-update/:id",  hotlineUpdate  );
-router.delete("/hotline-delete/:id", hotlineDelete );
+router.delete("/hotline-delete/:id", hotlineDelete);
+
+// address related api
+
+router.post("/address-upload", verifyAdmin ,uploadAddress);
+router.get("/all-address",allAddress );
+router.get("/address-by-id/:id", addressById );
+router.put("/address-update/:id",  addressUpdate  );
+router.delete("/address-delete/:id", addressDelete);
+
 
 
 
