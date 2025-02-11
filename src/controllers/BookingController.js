@@ -140,3 +140,39 @@ exports.allBookingData = async (req, res) => {
         return errorResponse(res, 500, "Something went wrong", error)
     }
 };
+
+exports.bookingById = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await bookingTwoModel.findOne(filter);
+        if (!data) {
+            return errorResponse(res, 404, "Data not found", null);
+        }
+        return successResponse(res, 200, "Data fetch successfully", data);
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error);
+    }
+};
+
+exports.bookingUpdate = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const reqBody = req.body;
+        const data = await bookingTwoModel.updateOne(filter, reqBody, { upsert: true });
+        if (!data) {
+            return errorResponse(res, 404, "Data not found", null);
+        }
+        return successResponse(res, 200, "Data upload successfully", data);
+    } catch (error) {
+
+        return errorResponse(res, 500, "Something went wrong", error);
+
+        
+    }
+};
