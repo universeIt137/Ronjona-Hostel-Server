@@ -1,10 +1,10 @@
 const { successResponse, errorResponse } = require("../helper/response");
-const hotlineModel = require("../models/HotlineModel");
+const addressModel = require("../models/AddressModel");
 
 exports.uploadAddress = async (req, res) => {
     try {
         let reqBody = req.body;
-        const data = await hotlineModel.create(reqBody);
+        const data = await addressModel.create(reqBody);
         return successResponse(res, 201, "Data upload successfully", data);
     } catch (error) {
         return errorResponse(res, 500, "Something went wrong", error);
@@ -13,7 +13,7 @@ exports.uploadAddress = async (req, res) => {
 
 exports.allAddress = async (req, res) => {
     try {
-        let data = await hotlineModel.find().sort({ createdAt: -1 });
+        let data = await addressModel.find().sort({ createdAt: -1 });
         if (data.length === 0) {
             return errorResponse(res, 404, "Data not found", null);
         }
@@ -29,7 +29,7 @@ exports.addressById = async (req, res) => {
         const filter = {
             _id: id
         };
-        const data = await hotlineModel.findOne(filter);
+        const data = await addressModel.findOne(filter);
         if (!data) {
             return errorResponse(res, 404, "Data not found", null);
         }
@@ -46,7 +46,7 @@ exports.addressUpdate = async (req, res) => {
             _id: id
         };
         const reqBody = req.body;
-        const data = await hotlineModel.updateOne(filter, reqBody, { upsert: true });
+        const data = await addressModel.updateOne(filter, reqBody, { upsert: true });
         if (!data) {
             return errorResponse(res, 404, "Data not found", null);
         };
@@ -63,7 +63,7 @@ exports.addressDelete = async (req, res) => {
         const filter = {
             _id: id
         };
-        const data = await hotlineModel.deleteOne(filter);
+        const data = await addressModel.deleteOne(filter);
         if (!data) {
             return errorResponse(res, 404, "Data not found", null);
         }
