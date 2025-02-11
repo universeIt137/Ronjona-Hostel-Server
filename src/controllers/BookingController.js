@@ -1,5 +1,6 @@
 const { successResponse, errorResponse } = require("../helper/response");
 const bookingModel = require("../models/BookingModel");
+const bookingTwoModel = require("../models/BookingTwoModel");
 
 
 exports.createBooking = async (req, res) => {
@@ -114,5 +115,16 @@ exports.deleteFrom = async (req, res) => {
         return successResponse(res, 200, "Data delete successfully");
     } catch (error) {
         return errorResponse(res, 500, "Something went wrong", error);
+    }
+};
+
+
+exports.bookingUpload = async (req, res) => {
+    try {
+        let reqBody = req.body;
+        const data = await bookingTwoModel.create(reqBody);
+        return successResponse(res, 201, "Booking successfully", data);
+    } catch (error) {
+        return errorResponse(res,500,"Something went wrong",error)
     }
 }

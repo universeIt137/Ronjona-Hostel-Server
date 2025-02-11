@@ -123,7 +123,31 @@ const branchByPackages = async (req, res) => {
     } catch (error) {
         return errorResponse(res, 500, "Something went wrong", error);
     }
-}
+};
+
+
+const locationBranchPackages = async (req, res) => {
+    try {
+        // const branch = req.params.branch;
+        const location =  new mongoose.Types.ObjectId(req.params.location) ;
+        const filter = {
+            location: location,
+            // branch: branch
+        };
+
+        const data = await PackageModel.find(filter); // Corrected query
+
+        if (data.length === 0) {
+            return errorResponse(res, 404, "Data not found", null);
+        }
+        return successResponse(res, 200, "Data fetched successfully", data);
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error);
+    }
+};
+
+
+
 
 module.exports = {
     createPackage,
@@ -132,5 +156,6 @@ module.exports = {
     updatePackage,
     deletePackage,
     packagesByBranch,
-    branchByPackages
+    branchByPackages,
+    locationBranchPackages
 };

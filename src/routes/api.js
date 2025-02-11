@@ -1,6 +1,6 @@
 const express = require('express');
 const { hello } = require('../controllers/HelloController');
-    const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage, packagesByBranch, branchByPackages, } = require('../controllers/PackageController');
+    const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage, packagesByBranch, branchByPackages, locationBranchPackages, } = require('../controllers/PackageController');
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
 const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch, locationByBranch } = require('../controllers/BranchController');
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy, postPrivacy } = require('../controllers/PrivacyController');
@@ -16,7 +16,7 @@ const { sendContactData, allContactData, statusUpdate, deleteContact } = require
 const { aboutDataUpload, aboutDataById } = require('../controllers/AboutController');
 const { missionDataUpload } = require('../controllers/VissionMissionController');
 const { createTeam, getAllTeamMember, getTeamMemberById, updateTeam, deleteTeam } = require('../controllers/TeamController');
-const { createBooking, manageBookingPackages, bookingFromStatusUpdate, deleteFrom } = require('../controllers/BookingController');
+const { createBooking, manageBookingPackages, bookingFromStatusUpdate, deleteFrom, bookingUpload } = require('../controllers/BookingController');
 const { whyChooseDataUpload, chooseDataById } = require('../controllers/WhyChooseController');
 const { missionVisionUpload, missionvissionById } = require('../controllers/missionVissionController');
 const { createKeyFeature, getAllKeyFeatures, keyFeatureFindById, keyFeatureUpdate, deleteKeyFeature, keyFeatureUpload, keyFeatureData } = require('../controllers/KeyFeatureController');
@@ -39,6 +39,7 @@ router.put('/updatePackage/:id', updatePackage);
 router.delete('/deletePackage/:id', verifyAdmin, deletePackage);
 router.get("/packages-by-branch/:id", packagesByBranch);
 router.get("/branch-by-packages/:id", branchByPackages);
+router.get("/packages/:branch", locationBranchPackages);
 
 
 // location related api
@@ -154,7 +155,9 @@ router.delete("/team/:id", deleteTeam);
 router.post("/booking", createBooking);
 router.get("/manage-booking", manageBookingPackages);
 router.put("/manage-booking/:id", bookingFromStatusUpdate);
-router.delete("/manage-booking/:id", deleteFrom );
+router.delete("/manage-booking/:id", deleteFrom);
+
+router.post("/booking-upload", bookingUpload )
 
 
 // why choose api
