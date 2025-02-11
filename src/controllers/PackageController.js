@@ -9,7 +9,7 @@ const createPackage = async (req, res) => {
         const data = await PackageModel.create(reqBody);
         return successResponse(res, 201, "Data upload successfully", data);
     } catch (error) {
-        return errorResponse(res,500,"Something went wrong",error)
+        return errorResponse(res, 500, "Something went wrong", error)
     }
 };
 
@@ -128,11 +128,11 @@ const branchByPackages = async (req, res) => {
 
 const locationBranchPackages = async (req, res) => {
     try {
-        // const branch = req.params.branch;
-        const location =  new mongoose.Types.ObjectId(req.params.location) ;
+        const location = new mongoose.Types.ObjectId(req.params.location);
+        const branch = new mongoose.Types.ObjectId(req.params.branch);
         const filter = {
             location: location,
-            // branch: branch
+            branch: branch
         };
 
         const data = await PackageModel.find(filter); // Corrected query
