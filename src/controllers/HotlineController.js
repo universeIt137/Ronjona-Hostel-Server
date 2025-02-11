@@ -38,3 +38,38 @@ exports.hotlineById = async (req, res) => {
         return errorResponse(res, 500, "Something went wrong", error);
     }
 };
+
+exports.hotlineUpdate = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const reqBody = req.body;
+        const data = await hotlineModel.updateOne(filter, reqBody, { upsert: true });
+        if (!data) {
+            return errorResponse(res, 404, "Data not found", null);
+        };
+        return successResponse(res, 200, "hotline update successfully", data);
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error);
+        
+    }
+};
+
+exports.hotlineDelete = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await hotlineModel.deleteOne(filter);
+        if (!data) {
+            return errorResponse(res, 404, "Data not found", null);
+        }
+        return successResponse(res,200,"Data delete successfully",data)
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error  );
+        
+    }
+}
