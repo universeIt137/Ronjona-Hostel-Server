@@ -1,6 +1,6 @@
 const express = require('express');
 const { hello } = require('../controllers/HelloController');
-    const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage, packagesByBranch, branchByPackages, locationBranchPackages, } = require('../controllers/PackageController');
+const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage, packagesByBranch, branchByPackages, locationBranchPackages, } = require('../controllers/PackageController');
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
 const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch, locationByBranch } = require('../controllers/BranchController');
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy, postPrivacy } = require('../controllers/PrivacyController');
@@ -24,6 +24,7 @@ const { createFaq, allFaq, faqById, faqUpdate, faqDelete } = require('../control
 const { cratePayment, getAllPayment, paymentById, paymentUpdate, paymentDelete } = require('../controllers/PymentController');
 const { postTermCondiction, getTermCondictionById } = require('../controllers/TermCondictionController');
 const { postRefund, getRefundById } = require('../controllers/RefundController');
+const { uploadHotline } = require('../controllers/HotlineController');
 
 
 const router = express.Router();
@@ -55,7 +56,7 @@ router.get('/getAllBranches', getAllBranches);
 router.get('/getBranchById/:id', getBranchById);
 router.put('/updateBranch/:id', updateBranch);
 router.delete('/deleteBranch/:id', deleteBranch);
-router.get("/locationby-branch/:id",locationByBranch)
+router.get("/locationby-branch/:id", locationByBranch)
 
 // privacy related api 
 router.post('/createPrivacy', createPrivacy);
@@ -63,7 +64,7 @@ router.get('/getAllPrivacy', getAllPrivacy);
 router.get('/getPrivacyById', getPrivacyById);
 router.put('/updatePrivacy/:id', updatePrivacy);
 router.delete('/deletePrivacy/:id', deletePrivacy);
-router.put("/privacy-upload",  postPrivacy )
+router.put("/privacy-upload", postPrivacy)
 
 // banner related api 
 router.post('/createBanner', verifyAdmin, createBanner);
@@ -92,10 +93,10 @@ router.post('/uploadPhoto', uploadPhoto);
 router.get('/getAllPhoto', getAllPhoto);
 router.get('/getPhotoById/:id', getPhotoById);
 router.put('/updatePhoto/:id', updatePhoto);
-router.delete("/delete-photo/:id" , deletePhoto  )
+router.delete("/delete-photo/:id", deletePhoto)
 
 // video gallery related api 
-router.post('/uploadVideo',  uploadVideo);
+router.post('/uploadVideo', uploadVideo);
 router.get('/getAllVideo', getAllVideo);
 router.get('/getVideoById/:id', getVideoById);
 router.put('/updateVideo/:id', verifyAdmin, updateVideo);
@@ -114,22 +115,22 @@ router.delete("/deleteUser/:id", verifyAdmin, deleteUser);
 
 router.post("/create-offer", verifyAdmin, CreateOffer);
 router.get("/all-offer", AllOffer);
-router.get("/offer-by-id/:id",  OfferById );
-router.put("/offer-update/:id", verifyAdmin ,OfferUpdate );
+router.get("/offer-by-id/:id", OfferById);
+router.put("/offer-update/:id", verifyAdmin, OfferUpdate);
 router.delete("/offer-delete/:id", verifyAdmin, OfferDelete);
 
 
 // contact related api
 
 router.post("/send-contact", sendContactData);
-router.get("/all-data",  allContactData );
-router.put("/update-status/:id",  statusUpdate );
+router.get("/all-data", allContactData);
+router.put("/update-status/:id", statusUpdate);
 router.delete("/delete-data/:id", deleteContact);
 
 // about related data
 
 router.put("/about-data", aboutDataUpload);
-router.get("/aboutDataById", aboutDataById )
+router.get("/aboutDataById", aboutDataById)
 
 
 
@@ -181,7 +182,7 @@ router.get("/vission-mission", missionvissionById);
 
 
 
-router.put("/key-features", keyFeatureUpload );
+router.put("/key-features", keyFeatureUpload);
 router.get("/key-features", keyFeatureData);
 
 
@@ -212,7 +213,11 @@ router.get("/get-term", getTermCondictionById);
 // refund api
 
 router.put("/refund", postRefund);
-router.get("/refund", getRefundById );
+router.get("/refund", getRefundById);
+
+// hotline related api
+
+router.post("/upload", verifyAdmin ,uploadHotline);
 
 
 
