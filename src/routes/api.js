@@ -41,7 +41,7 @@ router.put('/updatePackage/:id', updatePackage);
 router.delete('/deletePackage/:id', verifyAdmin, deletePackage);
 router.get("/packages-by-branch/:id", packagesByBranch);
 router.get("/branch-by-packages/:id", branchByPackages);
-router.get("/packages/:branch", locationBranchPackages);
+router.get("/packages/:location/:branch", locationBranchPackages);
 
 
 // location related api
