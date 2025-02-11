@@ -9,7 +9,7 @@ const DataSchema = mongoose.Schema(
         role: {
             type: String,
             enum: ["user", "admin", ""],
-            default: ""
+            default: "user"
         }
     },
     {
