@@ -24,7 +24,7 @@ const { createFaq, allFaq, faqById, faqUpdate, faqDelete } = require('../control
 const { cratePayment, getAllPayment, paymentById, paymentUpdate, paymentDelete } = require('../controllers/PymentController');
 const { postTermCondiction, getTermCondictionById } = require('../controllers/TermCondictionController');
 const { postRefund, getRefundById } = require('../controllers/RefundController');
-const { uploadHotline } = require('../controllers/HotlineController');
+const { uploadHotline, allNumber } = require('../controllers/HotlineController');
 
 
 const router = express.Router();
@@ -218,6 +218,7 @@ router.get("/refund", getRefundById);
 // hotline related api
 
 router.post("/upload", verifyAdmin ,uploadHotline);
+router.get("/all-hotline",allNumber);
 
 
 
