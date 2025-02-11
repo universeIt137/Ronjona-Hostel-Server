@@ -19,6 +19,22 @@ exports.allNumber = async (req, res) => {
         }
         return successResponse(res, 200, "Data fetch successfully", data);
     } catch (error) {
-        return errorResponse(res,500,"Something went wrong",error)
+        return errorResponse(res, 500, "Something went wrong", error)
     }
-}
+};
+
+exports.hotlineById = async (req, res) => {
+    try {
+        let id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await hotlineModel.findOne(filter);
+        if (!data) {
+            return errorResponse(res, 404, "Data not found", null);
+        }
+        return successResponse(res, 200, "Data fetch by id successfully", data);
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error);
+    }
+};
