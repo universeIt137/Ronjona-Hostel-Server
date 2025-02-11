@@ -13,8 +13,12 @@ const DataSchema = new mongoose.Schema(
         title: { type: String, },
         desc: { type: String },
         price: { type: String },
-        branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches", required: true },
-        locationId: { type: mongoose.Schema.Types.ObjectId, ref: "locations", required: true },
+        branch: { type: mongoose.Schema.Types.ObjectId, ref: "branches"},
+        location: { type: mongoose.Schema.Types.ObjectId, ref: "locations" },
+        seatAvalible: {
+            type: String,
+            default: "Yes"
+        },
         bannerImage: { type: String },
     },
     {

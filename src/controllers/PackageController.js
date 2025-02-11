@@ -5,11 +5,11 @@ const { errorResponse, successResponse } = require("../helper/response");
 // Create a new package
 const createPackage = async (req, res) => {
     try {
-        const newPackage = new PackageModel(req.body);
-        await newPackage.save();
-        res.status(201).json({ success: true, data: newPackage });
+        let reqBody = req.body;
+        const data = await PackageModel.create(reqBody);
+        return successResponse(res, 201, "Data upload successfully", data);
     } catch (error) {
-        res.status(500).json({ success: false, message: "Failed to create package", error });
+        return errorResponse(res,500,"Something went wrong",error)
     }
 };
 
