@@ -16,7 +16,7 @@ const { sendContactData, allContactData, statusUpdate, deleteContact } = require
 const { aboutDataUpload, aboutDataById } = require('../controllers/AboutController');
 const { missionDataUpload } = require('../controllers/VissionMissionController');
 const { createTeam, getAllTeamMember, getTeamMemberById, updateTeam, deleteTeam } = require('../controllers/TeamController');
-const { createBooking, manageBookingPackages, bookingFromStatusUpdate, deleteFrom, bookingUpload } = require('../controllers/BookingController');
+const { createBooking, manageBookingPackages, bookingFromStatusUpdate, deleteFrom, bookingUpload, allBookingData } = require('../controllers/BookingController');
 const { whyChooseDataUpload, chooseDataById } = require('../controllers/WhyChooseController');
 const { missionVisionUpload, missionvissionById } = require('../controllers/missionVissionController');
 const { createKeyFeature, getAllKeyFeatures, keyFeatureFindById, keyFeatureUpdate, deleteKeyFeature, keyFeatureUpload, keyFeatureData } = require('../controllers/KeyFeatureController');
@@ -157,7 +157,8 @@ router.get("/manage-booking", manageBookingPackages);
 router.put("/manage-booking/:id", bookingFromStatusUpdate);
 router.delete("/manage-booking/:id", deleteFrom);
 
-router.post("/booking-upload", bookingUpload )
+router.post("/booking-upload", bookingUpload);
+router.get("/all-booking", allBookingData);
 
 
 // why choose api
