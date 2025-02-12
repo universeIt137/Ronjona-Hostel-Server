@@ -26,7 +26,7 @@ const { postTermCondiction, getTermCondictionById } = require('../controllers/Te
 const { postRefund, getRefundById } = require('../controllers/RefundController');
 const { uploadHotline, allNumber, hotlineById, hotlineUpdate, hotlineDelete } = require('../controllers/HotlineController');
 const { uploadAddress, allAddress, addressById, addressUpdate, addressDelete } = require('../controllers/AddressController');
-const { createPrice, allPrice } = require('../controllers/PriceControlelr');
+const { createPrice, allPrice, deletePrice } = require('../controllers/PriceControlelr');
 
 
 const router = express.Router();
@@ -219,24 +219,25 @@ router.get("/refund", getRefundById);
 
 // hotline related api
 
-router.post("/upload", verifyAdmin ,uploadHotline);
-router.get("/all-hotline",allNumber);
-router.get("/hotline-by-id/:id", hotlineById );
-router.put("/hotline-update/:id",  hotlineUpdate  );
+router.post("/upload", verifyAdmin, uploadHotline);
+router.get("/all-hotline", allNumber);
+router.get("/hotline-by-id/:id", hotlineById);
+router.put("/hotline-update/:id", hotlineUpdate);
 router.delete("/hotline-delete/:id", hotlineDelete);
 
 // address related api
 
-router.post("/address-upload", verifyAdmin ,uploadAddress);
-router.get("/all-address",allAddress );
-router.get("/address-by-id/:id", addressById );
-router.put("/address-update/:id",  addressUpdate  );
+router.post("/address-upload", verifyAdmin, uploadAddress);
+router.get("/all-address", allAddress);
+router.get("/address-by-id/:id", addressById);
+router.put("/address-update/:id", addressUpdate);
 router.delete("/address-delete/:id", addressDelete);
 
 // price related api
 
 router.post("/price-upload", createPrice);
-router.get("/all-price", allPrice );
+router.get("/all-price", allPrice);
+router.delete("/delete-price/:id", deletePrice);
 
 
 
