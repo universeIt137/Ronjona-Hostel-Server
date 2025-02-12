@@ -26,7 +26,7 @@ const { postTermCondiction, getTermCondictionById } = require('../controllers/Te
 const { postRefund, getRefundById } = require('../controllers/RefundController');
 const { uploadHotline, allNumber, hotlineById, hotlineUpdate, hotlineDelete } = require('../controllers/HotlineController');
 const { uploadAddress, allAddress, addressById, addressUpdate, addressDelete } = require('../controllers/AddressController');
-const { createPrice } = require('../controllers/PriceControlelr');
+const { createPrice, allPrice } = require('../controllers/PriceControlelr');
 
 
 const router = express.Router();
@@ -235,7 +235,8 @@ router.delete("/address-delete/:id", addressDelete);
 
 // price related api
 
-router.post("/price-upload", createPrice )
+router.post("/price-upload", createPrice);
+router.get("/all-price", allPrice );
 
 
 
