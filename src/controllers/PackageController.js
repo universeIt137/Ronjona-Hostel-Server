@@ -35,19 +35,46 @@ const getAllPackages = async (req, res) => {
     }
 };
 
+
 // Get a package by ID
 const getPackageById = async (req, res) => {
+    const { id } = req.params;
+
     try {
-        const { id } = req.params;
-        const package = await PackageModel.findById(id);
-        if (!package) {
+        // Convert `id` to ObjectId
+        const objectId = new mongoose.Types.ObjectId(id);
+
+        // Aggregation Pipeline
+        const packageData = await PackageModel.aggregate([
+            {
+                $match: { _id: objectId } // Match package by ID
+            },
+            {
+                $lookup: {
+                    from: "locations", // The collection to join
+                    localField: "location", // Field in `packages`
+                    foreignField: "_id", // Field in `locations`
+                    as: "locationDetails" // Alias for joined data
+                }
+            },
+            {
+                $unwind: { path: "$locationDetails", preserveNullAndEmptyArrays: true } // Flatten array (optional)
+            }
+        ]);
+
+        // If no package found
+        if (!packageData || packageData.length === 0) {
             return res.status(404).json({ success: false, message: "Package not found" });
         }
-        res.status(200).json({ success: true, data: package });
+
+        // Send Response
+        res.status(200).json({ success: true, data: packageData[0] });
     } catch (error) {
         res.status(500).json({ success: false, message: "Failed to fetch package", error });
     }
 };
+
+
 
 // Update a package by ID
 const updatePackage = async (req, res) => {
