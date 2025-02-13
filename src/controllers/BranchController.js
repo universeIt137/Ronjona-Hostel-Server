@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const { errorResponse, successResponse } = require("../helper/response");
 const BranchModel = require("../models/BranchModel")
 
@@ -16,13 +17,11 @@ const createBranch = async (req, res) => {
     }
 };
 
-
-
 // get all branches with location info populated
 const getAllBranches = async (req, res) => {
     try {
         const branches = await BranchModel.find().populate('location').sort({
-            createdAt : -1
+            createdAt: -1
         });
         res.status(200).json({ success: true, data: branches });
     } catch (error) {
@@ -88,17 +87,38 @@ const locationByBranch = async (req, res) => {
     try {
         let id = req.params.id;
         let filter = {
-            location : id
+            location: id
         };
         let data = await BranchModel.find(filter).sort({ createdAt: -1 });
         if (data.length === 0) {
-            return errorResponse(res,404,"Location not found",null)
+            return errorResponse(res, 404, "Location not found", null)
         }
         return successResponse(res, 200, "Location fetch successfully", data);
     } catch (error) {
-        return errorResponse(res,500,"Something went wrong",null)
+        return errorResponse(res, 500, "Something went wrong", null)
     }
+};
+
+
+const locationByBranchName = async (req, res) => {
+
+    try {
+        let id = new mongoose.Types.ObjectId(req.params.id);
+        const filter = {
+            location: id
+        };
+        let data = await BranchModel.find(filter).sort({ createdAt: -1 });
+        if (data.length === 0) {
+            return errorResponse(res, 404, "Location not found", null)
+        }
+        return successResponse(res, 200, "Location fetch successfully", data);
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", null);
+    }
+
 }
+
+
 
 
 
@@ -109,5 +129,6 @@ module.exports = {
     getBranchById,
     updateBranch,
     deleteBranch,
-    locationByBranch
+    locationByBranch,
+    locationByBranchName
 }

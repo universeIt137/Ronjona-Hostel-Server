@@ -2,7 +2,7 @@ const express = require('express');
 const { hello } = require('../controllers/HelloController');
 const { createPackage, getAllPackages, getPackageById, updatePackage, deletePackage, packagesByBranch, branchByPackages, locationBranchPackages, } = require('../controllers/PackageController');
 const { createLocation, getAllLocations, getLocationById, updateLocation, deleteLocation } = require('../controllers/LocationController');
-const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch, locationByBranch } = require('../controllers/BranchController');
+const { createBranch, getAllBranches, getBranchById, updateBranch, deleteBranch, locationByBranch, locationByBranchName } = require('../controllers/BranchController');
 const { createPrivacy, getAllPrivacy, getPrivacyById, updatePrivacy, deletePrivacy, postPrivacy } = require('../controllers/PrivacyController');
 const { createBanner, getAllBanner, getBannerById, updateBanner, deleteBanner } = require('../controllers/BannerController');
 const { createFeature, getAllFeatures, getFeatureById, updateFeature, deleteFeature } = require('../controllers/FeatureController');
@@ -58,7 +58,9 @@ router.get('/getAllBranches', getAllBranches);
 router.get('/getBranchById/:id', getBranchById);
 router.put('/updateBranch/:id', updateBranch);
 router.delete('/deleteBranch/:id', deleteBranch);
-router.get("/locationby-branch/:id", locationByBranch)
+router.get("/locationby-branch/:id", locationByBranch);
+
+router.get("/locationby-branch-name/:id", locationByBranchName);
 
 // privacy related api 
 router.post('/createPrivacy', createPrivacy);
