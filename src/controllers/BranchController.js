@@ -103,7 +103,7 @@ const locationByBranch = async (req, res) => {
 const locationByBranchName = async (req, res) => {
 
     try {
-        let id = new mongoose.Types.ObjectId(req.params.id);
+        let id = new mongoose.Types.ObjectId(req.params.id||null);
         const filter = {
             location: id
         };
