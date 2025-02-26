@@ -22,62 +22,39 @@ exports.createBooking = async (req, res) => {
 
 exports.manageBookingPackages = async (req, res) => {
     try {
-
-        // join packages model
-
-        const joinWithPakagesModel = {
-            $lookup: {
-                from: "packages", // Collection you want to join with
-                localField: "packagesId", // Field from the current collection
-                foreignField: "_id", // Field from the 'packages' collection
-                as: "packageDetails" // Alias for the result of the join
-            }
-        };
-
-        // join branch model
-
-        const joinWithBranchId = {
-            $lookup: {
-                from: "branches",
-                localField: "packageDetails.branch",
-                foreignField: "_id",
-                as: "branchDetails"
-            }
-        }
-
-        // join  location model
-
-        const joinWithLocationModel = {
-            $lookup: {
-                from: "locations",
-                localField: "branchDetails.location",
-                foreignField: "_id",
-                as: "locationDetails"
-            }
-        }
-
-        // unwind
-
-        const packagesUnwind = {
-            $unwind: "$packageDetails" // Correctly specify the field path with $
-        };
-        // unwind branchDetails
-        const branchUnwind = {
-            $unwind: "$branchDetails" // Correctly specify the field path with $
-        };
-        // unwind location
-
-        const locationUnwind = {
-            $unwind: "$locationDetails" // Correctly specify the field path with $
-        };
-
-
-
-        const data = await bookingModel.aggregate([joinWithPakagesModel, packagesUnwind, joinWithBranchId, branchUnwind, joinWithLocationModel, locationUnwind])
+        const data = await bookingModel.aggregate([
+            {
+                $lookup: {
+                    from: "packages",
+                    localField: "packagesId",
+                    foreignField: "_id",
+                    as: "packageDetails"
+                }
+            },
+            { $unwind: { path: "$packageDetails", preserveNullAndEmptyArrays: true } },
+            {
+                $lookup: {
+                    from: "branches",
+                    localField: "packageDetails.branch", // Ensure branch is the correct field in packages
+                    foreignField: "_id",
+                    as: "branchDetails"
+                }
+            },
+            { $unwind: { path: "$branchDetails", preserveNullAndEmptyArrays: true } },
+            {
+                $lookup: {
+                    from: "locations",
+                    localField: "branchDetails.location", // Ensure location is the correct field in branches
+                    foreignField: "_id",
+                    as: "locationDetails"
+                }
+            },
+            { $unwind: { path: "$locationDetails", preserveNullAndEmptyArrays: true } }
+        ]);
 
         return successResponse(res, 200, "Data fetched successfully", data);
     } catch (error) {
-        console.error("Error fetching booking packages:", error); // Log detailed error
+        console.error("Error fetching booking packages:", error);
         return errorResponse(res, 500, "Something went wrong", error.message || error);
     }
 };
@@ -95,9 +72,9 @@ exports.bookingFromStatusUpdate = async (req, res) => {
             status: updateData
         };
         const updateStatusData = await bookingModel.updateOne(filter, { $set: statusUpdate }, { upsert: true });
-        return successResponse(res,200,"Status update successfully",updateStatusData)
+        return successResponse(res, 200, "Status update successfully", updateStatusData)
     } catch (error) {
-        return errorResponse(res,500,"Something went wrong",error)
+        return errorResponse(res, 500, "Something went wrong", error)
     }
 }
 
@@ -173,6 +150,6 @@ exports.bookingUpdate = async (req, res) => {
 
         return errorResponse(res, 500, "Something went wrong", error);
 
-        
+
     }
 };

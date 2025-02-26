@@ -10,6 +10,9 @@ const bookingSchema = new Schema({
     phoneNumber: {
         type: String
     },
+    amount: {
+        type : String
+    },
     packagesId: {
         type: mongoose.Types.ObjectId,
         ref: "PackageModel"
