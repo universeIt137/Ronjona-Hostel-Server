@@ -9,6 +9,9 @@ const bookingSchema = new Schema({
     },
     phoneNumber: {
         type : String
+    },
+    amount: {
+        type : String
     }
 }, { timestamps: true, versionKey: false });
 
