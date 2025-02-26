@@ -2,24 +2,24 @@ const mongoose = require("mongoose");
 
 const { Schema, model } = mongoose;
 
-
-
-
 const paymentSchema = new Schema({
+    logo: {
+        type: String
+    },
     accountName: {
-        type : String
+        type: String
     },
     accountNumber: {
-        type : String
+        type: String
     },
     bankName: {
-        type : String
+        type: String
     },
     phoneNumber: {
-        type : String
+        type: String
     },
     branchName: {
-        type : String
+        type: String
     }
 }, { timestamps: true, versionKey: false });
 
