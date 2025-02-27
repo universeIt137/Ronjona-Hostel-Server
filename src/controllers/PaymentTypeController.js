@@ -35,8 +35,8 @@ exports.singlePayment = async (req, res) => {
         }
         return successResponse(res, 200, "Single payment type fetch successfully", data);
     } catch (error) {
-        return errorResponse(res,500,"Something went wrong",error)
-        
+        return errorResponse(res, 500, "Something went wrong", error)
+
     }
 };
 
@@ -52,6 +52,20 @@ exports.paymentTypeUpdate = async (req, res) => {
             return errorResponse(res, 404, "Payment type not found", null)
         }
         return successResponse(res, 200, "Payment type update successfully", data);
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error);
+    }
+};
+
+exports.paymentTypeDelete = async (req, res) => {
+    try {
+        let id = req.params.id;
+        console.log(id);
+        const data = await paymentTypeModel.findByIdAndDelete(id);
+        if (!data) {
+            return errorResponse(res, 404, "Payment type not found", null);
+        }
+        return successResponse(res, 200, "Payment type deleted successfully", data);
     } catch (error) {
         return errorResponse(res, 500, "Something went wrong", error);
     }
