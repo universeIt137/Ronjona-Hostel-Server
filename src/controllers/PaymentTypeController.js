@@ -11,7 +11,6 @@ exports.createPaymentType = async (req, res) => {
     }
 };
 
-
 exports.allPaymentType = async (req, res) => {
     try {
         let data = await paymentTypeModel.find().sort({ createdAt: -1 });
@@ -23,7 +22,6 @@ exports.allPaymentType = async (req, res) => {
         return errorResponse(res, 500, "something went wrong", error);
     }
 };
-
 
 exports.singlePayment = async (req, res) => {
     try {
@@ -39,5 +37,22 @@ exports.singlePayment = async (req, res) => {
     } catch (error) {
         return errorResponse(res,500,"Something went wrong",error)
         
+    }
+};
+
+exports.paymentTypeUpdate = async (req, res) => {
+    try {
+        const reqBody = req.body;
+        const id = req.params.id;
+        const filter = {
+            _id: id
+        };
+        const data = await paymentTypeModel.updateOne(filter, reqBody, { upsert: true });
+        if (!data) {
+            return errorResponse(res, 404, "Payment type not found", null)
+        }
+        return successResponse(res, 200, "Payment type update successfully", data);
+    } catch (error) {
+        return errorResponse(res, 500, "Something went wrong", error);
     }
 };
