@@ -27,6 +27,7 @@ const { postRefund, getRefundById } = require('../controllers/RefundController')
 const { uploadHotline, allNumber, hotlineById, hotlineUpdate, hotlineDelete } = require('../controllers/HotlineController');
 const { uploadAddress, allAddress, addressById, addressUpdate, addressDelete } = require('../controllers/AddressController');
 const { createPrice, allPrice, deletePrice } = require('../controllers/PriceControlelr');
+const { createPaymentType } = require('../controllers/PaymentTypeController');
 
 
 const router = express.Router();
@@ -240,6 +241,18 @@ router.delete("/address-delete/:id", addressDelete);
 router.post("/price-upload", createPrice);
 router.get("/all-price", allPrice);
 router.delete("/delete-price/:id", deletePrice);
+
+
+// payment type api
+
+router.post("/payment-type", createPaymentType )
+
+
+
+
+
+
+
 
 
 
