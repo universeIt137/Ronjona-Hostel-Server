@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const DataSchema = new mongoose.Schema(
     {
-        img: { type: [String] }, // Array of image URLs
+        img: [String], // Array of image URLs
         video: { type: String }, // Optional video URL
         features: [
             {
